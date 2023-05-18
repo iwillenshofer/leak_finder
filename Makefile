@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/15 18:12:50 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/17 16:30:32 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,9 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/alloc_lst_remove.c \
 		${SRC_DIR}/alloc_lst_realloc.c \
 		${SRC_DIR}/print.c \
-		${SRC_DIR}/constructor.c
-#		${SRC_DIR}/alloc_del.c \
-#		${SRC_DIR}/alloc_mem.c \
-#		${SRC_DIR}/alloc_re.c \
+		${SRC_DIR}/constructor.c \
+		${SRC_DIR}/alignment.c
+
 
 OBJS = $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRCS})
 DEPENDS = $(patsubst %.o, %.d, ${OBJS})
@@ -81,7 +80,7 @@ ${NAME}: ${LIBFT} ${OBJS} ${INCLUDES} Makefile
 	
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} Makefile
 	@mkdir -p $(dir $@)
-	@${CC} ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -I ${LIBFT_DIR} -o $@ ${LDFLAGS}
+	@${CC} ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -o $@ ${LDFLAGS}
 
 # **************************************************************************** #
 # *** Libft Rules                                                              #
@@ -104,7 +103,7 @@ ${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} ${TESTS_INCLUD
 	@${CC}  ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -I ${LIBFT_DIR} -o $@
 
 test: ${NAME} ${TEST}
-	./${TEST}
+	time -l ./${TEST}
 
 # **************************************************************************** #
 # *** Common Rules                                                             #

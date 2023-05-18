@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:46:05 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/15 15:40:46 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:23:44 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_alloc *alloc_realloc(void *ptr, size_t size)
 	t_alloc *alloc;
 	t_alloc *new_alloc;
 
+	size = _aligned_size(size);
 	new_type = get_type(size);
 	zone = find_zone(ptr);
 	alloc = find_alloc(ptr, zone);
@@ -97,9 +98,9 @@ t_alloc *alloc_realloc(void *ptr, size_t size)
 		new_alloc = reallocate(alloc, size);
 	else if (size <= alloc->size)
 		new_alloc = resize(alloc, size);
-	else if (alloc->next && (size_t)((char*)(alloc->next) - ((char*)(alloc) + sizeof(t_alloc))) >= size)
+	else if (alloc->next && (size_t)((char*)(alloc->next) - ((char*)(alloc) + _aligned_size(sizeof(t_alloc)))) >= size)
 		new_alloc = resize(alloc, size);
-	else if (!(alloc->next) && zone->size - (((char*)alloc + sizeof(t_alloc)) - (char*)(zone)) >= size)
+	else if (!(alloc->next) && zone->size - (((char*)alloc + _aligned_size(sizeof(t_alloc))) - (char*)(zone)) >= size)
 		new_alloc = resize(alloc, size);
 	else
 		new_alloc = reallocate(alloc, size);

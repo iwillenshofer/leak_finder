@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/12 11:53:56 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/17 01:30:55 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/mman.h>
-# include "libft.h"
+# include "../srcs/libft/libft.h"
 
 # define TINY 0
 # define MEDIUM 1
@@ -25,6 +25,7 @@
 # define TINY_LIMIT 993
 # define MEDIUM_LIMIT (15 * 1024) - 1
 
+# define ALIGNMENT 16
 # define DEBUG 1
 
 /*
@@ -61,7 +62,6 @@ typedef struct s_zone
     t_alloc *allocs;
     size_t size;
     char type;
-    char preallocated;
     struct s_zone *prev;
     struct s_zone *next;
 }   t_zone;
@@ -80,6 +80,9 @@ void *realloc(void *ptr, size_t size);
 __attribute__ ((visibility ("default")))
 void     show_alloc_mem(void);
 
+__attribute__ ((visibility ("default")))
+void     show_alloc_mem_ex(void);
+
 t_zone *zone_add(char type, size_t size);
 void    zone_remove(t_zone *zone);
 void    zone_sort(void);
@@ -87,10 +90,13 @@ t_alloc *alloc_add(size_t size);
 void alloc_remove(void *ptr);
 t_alloc *alloc_realloc(void *ptr, size_t size);
 void	_print_zones(void);
+void	_print_zones_ex(void);
+
 /*
 ** helpers
 */
 char    get_type(size_t size);
+size_t _aligned_size(size_t size);
 
 /*
 ** constructor && destructor 

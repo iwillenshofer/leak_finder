@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/10 15:32:24 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/17 00:08:48 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ t_alloc *find_spot(t_zone *zone, size_t size)
 	allocated = NULL;
 	head = zone->allocs;
 	if (!(head))
-		allocated = create_alloc((t_alloc*)((char*)(zone) + sizeof(t_zone)), NULL, NULL, size);
-	else if (head && head > (t_alloc*)((char*)(zone) + sizeof(t_zone) + sizeof(t_alloc) + size))
-		allocated = create_alloc((t_alloc*)((char*)(zone) + sizeof(t_zone)), NULL, zone->allocs, size);    
+		allocated = create_alloc((t_alloc*)((char*)(zone) + _aligned_size(sizeof(t_zone))), NULL, NULL, size);
+	else if (head && head > (t_alloc*)((char*)(zone) + _aligned_size(sizeof(t_zone)) + _aligned_size(sizeof(t_alloc)) + size))
+		allocated = create_alloc((t_alloc*)((char*)(zone) + _aligned_size(sizeof(t_zone))), NULL, zone->allocs, size);    
 	if (allocated && !(zone->allocs))
 		zone->allocs = allocated; /*in case the 1st position is changed*/
 	while (!(allocated) && head)
 	{
-		if (head->next && (char*)(head->next) > (char*)(head) + (sizeof(t_alloc) * 2) + head->size + size)
-			allocated = create_alloc((t_alloc*)((char*)(head) + sizeof(t_alloc) + head->size), head, head->next, size);   
-		else if (!(head->next) && ((char*)(zone) + zone->size > (char*)(head) + sizeof(t_alloc) * 2 + head->size  + size))
-			allocated = create_alloc((t_alloc*)((char*)(head) + head->size + sizeof(t_alloc)), head, NULL, size);
+		if (head->next && (char*)(head->next) > (char*)(head) + (_aligned_size(sizeof(t_alloc)) * 2) + head->size + size)
+			allocated = create_alloc((t_alloc*)((char*)(head) + _aligned_size(sizeof(t_alloc)) + head->size), head, head->next, size);   
+		else if (!(head->next) && ((char*)(zone) + zone->size > (char*)(head) + _aligned_size(sizeof(t_alloc)) * 2 + head->size  + size))
+			allocated = create_alloc((t_alloc*)((char*)(head) + head->size + _aligned_size(sizeof(t_alloc))), head, NULL, size);
 		head = head->next;
 	}
 	return (allocated);
@@ -81,6 +81,7 @@ t_alloc *alloc_add(size_t size)
 {
 	/*1. determine type*/
 	char type;
+	size = _aligned_size(size);
 	type = get_type(size);
 	t_zone *zone = g_zones;
 	t_alloc *allocated;

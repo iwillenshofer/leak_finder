@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:11:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/15 18:12:22 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:24:32 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ void	*realloc(void *ptr, size_t size)
 void	show_alloc_mem(void)
 {
 	_print_zones();
+}
+
+void	show_alloc_mem_ex(void)
+{
+	_print_zones_ex();
 }

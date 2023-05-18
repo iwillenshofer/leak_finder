@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/15 18:27:34 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:34:17 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t get_paginated_size(size_t size)
 
 	pagesize = getpagesize();
 	amount = (size > MEDIUM_LIMIT) ? 1 : 100;
-	total_size = sizeof(t_zone) + amount * sizeof(t_alloc);
+	total_size = _aligned_size(sizeof(t_zone)) + amount * (_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
 	if (size > MEDIUM_LIMIT)
 		total_size += size;
 	else if (size > TINY_LIMIT)
@@ -72,7 +72,7 @@ t_zone *zone_add(char type, size_t size)
 	ptr = allocate(total_size);
 	
 	/*2. set up zone structure*/
-	ft_bzero(ptr, sizeof(t_zone));
+	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
 	ptr->size = total_size;
 	ptr->type = type;
 	/*3. add to the end of g_zones.*/
