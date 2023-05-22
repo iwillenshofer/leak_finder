@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alignment.c                                        :+:      :+:    :+:   */
+/*   ft_puthex_byte.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 15:10:21 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 16:42:32 by iwillens         ###   ########.fr       */
+/*   Created: 2023/05/21 18:30:03 by iwillens          #+#    #+#             */
+/*   Updated: 2023/05/21 18:30:04 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-/*
-** ensure size is at least size, and multiple of 16 (ALIGNMENT).
-*/
-size_t	_aligned_size(size_t size)
+void	_print_hex_byte(unsigned char c)
 {
-	size_t	rest;
+	if (c < 10)
+		c += '0';
+	else
+		c += 'a' - 10;
+	ft_putchar(c);
+}
 
-	if (size < ALIGNMENT)
-		return (ALIGNMENT);
-	rest = size % ALIGNMENT;
-	if (!rest)
-		return (size);
-	return (size + (ALIGNMENT - rest));
+void	ft_puthexbyte(unsigned char c)
+{
+	unsigned char	n1;
+	unsigned char	n2;
+
+	n1 = c / 16;
+	n2 = c % 16;
+	_print_hex_byte(n1);
+	_print_hex_byte(n2);
 }

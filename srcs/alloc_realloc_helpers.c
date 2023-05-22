@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alignment.c                                        :+:      :+:    :+:   */
+/*   alloc_realloc_helpers.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 15:10:21 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 16:42:32 by iwillens         ###   ########.fr       */
+/*   Created: 2023/05/21 17:01:02 by iwillens          #+#    #+#             */
+/*   Updated: 2023/05/21 17:23:36 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_malloc.h"
 
-/*
-** ensure size is at least size, and multiple of 16 (ALIGNMENT).
-*/
-size_t	_aligned_size(size_t size)
+char	_is_space_realloc_middle(t_alloc *alloc, size_t size)
 {
-	size_t	rest;
+	return (alloc->next
+		&& (size_t)((char *)(alloc->next) - _endalloc(alloc)) >= size);
+}
 
-	if (size < ALIGNMENT)
-		return (ALIGNMENT);
-	rest = size % ALIGNMENT;
-	if (!rest)
-		return (size);
-	return (size + (ALIGNMENT - rest));
+char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size)
+{
+	return (!(alloc->next)
+		&& zone->size - (_endalloc(alloc) - (char*)(zone)) >= size);
 }

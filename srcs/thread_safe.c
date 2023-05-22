@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alignment.c                                        :+:      :+:    :+:   */
+/*   thread_safe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 15:10:21 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 16:42:32 by iwillens         ###   ########.fr       */
+/*   Created: 2023/05/18 23:51:51 by iwillens          #+#    #+#             */
+/*   Updated: 2023/05/21 17:03:07 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_malloc.h"
 
-/*
-** ensure size is at least size, and multiple of 16 (ALIGNMENT).
-*/
-size_t	_aligned_size(size_t size)
+void	create_mutex(void)
 {
-	size_t	rest;
+	pthread_mutex_init(&g_mutex, NULL);
+}
 
-	if (size < ALIGNMENT)
-		return (ALIGNMENT);
-	rest = size % ALIGNMENT;
-	if (!rest)
-		return (size);
-	return (size + (ALIGNMENT - rest));
+void	destroy_mutex(void)
+{
+	pthread_mutex_destroy(&g_mutex);
+}
+
+void	lock_mutex(void)
+{
+	pthread_mutex_lock(&g_mutex);
+}
+
+void	unlock_mutex(void)
+{
+	pthread_mutex_unlock(&g_mutex);
 }

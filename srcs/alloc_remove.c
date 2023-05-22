@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_lst_remove.c                                 :+:      :+:    :+:   */
+/*   alloc_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/15 19:34:54 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:17:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_malloc.h"
 
+/*
+** dettaches allocation from list, and deallocates zone, if it is now empty.
+*/
 void	free_alloc(t_alloc *alloc, t_zone *zone)
 {
 	if (alloc->prev)
@@ -20,7 +23,8 @@ void	free_alloc(t_alloc *alloc, t_zone *zone)
 		alloc->next->prev = alloc->prev;
 	if (zone->allocs == alloc)
 		zone->allocs = alloc->next;
-	if (!(alloc->next) && !(alloc->prev) && zone != g_zones && zone != g_zones->next)
+	if (!(alloc->next) && !(alloc->prev) && zone != g_zones
+		&& zone != g_zones->next)
 		zone_remove(zone);
 }
 
@@ -43,20 +47,15 @@ void	alloc_remove(void *ptr)
 			{
 				if (alloc->ptr == ptr)
 				{
-					/*free*/
 					free_alloc(alloc, zone);
 					return ;
 				}
 				else if ((char *)ptr > (char *)alloc
 					&& (char *)ptr < ((char *)(alloc->ptr) + alloc->size))
-				{
-					/*attempting free on address which was not malloc()-ed (bad-free)*/
 					return ;
-				}
 				alloc = alloc->next;
 			}
 		}
 		zone = zone->next;
 	}
-	/*if we reached here, the memory was not malloc()-ed*/
 }

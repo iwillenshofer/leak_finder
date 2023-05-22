@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:11:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/16 21:24:32 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:24:14 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ t_zone	*g_zones = NULL;
 
 void	free(void *ptr)
 {
-/*	ft_putstr("### free: ");
-	ft_puthex((size_t)ptr);
-	ft_putstr("\n");*/
-
 	if (ptr)
+	{
+		lock_mutex();
 		alloc_remove(ptr);
+		unlock_mutex();
+	}
 	return ;
 }
 
@@ -31,14 +31,13 @@ void	free(void *ptr)
 */
 void	*malloc(size_t size)
 {
-/*	ft_putstr("### alloc: ");
-	ft_putnbr(size);
-	ft_putstr("\n");*/
-	t_alloc *new_alloc;
-	
+	t_alloc	*new_alloc;
+
 	if (!(size))
 		return (NULL);
+	lock_mutex();
 	new_alloc = alloc_add(size);
+	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);
 	return (new_alloc->ptr);
@@ -46,7 +45,7 @@ void	*malloc(size_t size)
 
 void	*realloc(void *ptr, size_t size)
 {
-	t_alloc *new_alloc;
+	t_alloc	*new_alloc;
 
 	if (!ptr)
 		return (malloc(size));
@@ -55,7 +54,9 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (ptr);
 	}
+	lock_mutex();
 	new_alloc = alloc_realloc(ptr, size);
+	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);
 	return (new_alloc->ptr);
@@ -63,10 +64,14 @@ void	*realloc(void *ptr, size_t size)
 
 void	show_alloc_mem(void)
 {
+	lock_mutex();
 	_print_zones();
+	unlock_mutex();
 }
 
 void	show_alloc_mem_ex(void)
 {
+	lock_mutex();
 	_print_zones_ex();
+	unlock_mutex();
 }

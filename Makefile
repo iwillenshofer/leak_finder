@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/17 16:30:32 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/22 10:51:02 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1 #-fsanitize=address -g
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1# -fsanitize=address -g
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./build
@@ -30,15 +30,18 @@ INC_DIR = ./includes
 INCLUDES = ${INC_DIR}/libft_malloc.h
 
 SRCS = ${SRC_DIR}/malloc.c \
-		${SRC_DIR}/zone_lst_add.c \
-		${SRC_DIR}/zone_lst_remove.c \
-		${SRC_DIR}/zone_lst_sort.c \
-		${SRC_DIR}/alloc_lst_add.c \
-		${SRC_DIR}/alloc_lst_remove.c \
-		${SRC_DIR}/alloc_lst_realloc.c \
+		${SRC_DIR}/zone_add.c \
+		${SRC_DIR}/zone_remove.c \
+		${SRC_DIR}/zone_sort.c \
+		${SRC_DIR}/alloc_add.c \
+		${SRC_DIR}/alloc_add_helpers.c \
+		${SRC_DIR}/alloc_remove.c \
+		${SRC_DIR}/alloc_realloc.c \
+		${SRC_DIR}/alloc_realloc_helpers.c \
 		${SRC_DIR}/print.c \
 		${SRC_DIR}/constructor.c \
-		${SRC_DIR}/alignment.c
+		${SRC_DIR}/alignment.c \
+		${SRC_DIR}/thread_safe.c
 
 
 OBJS = $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRCS})
@@ -103,6 +106,9 @@ ${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} ${TESTS_INCLUD
 	@${CC}  ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -I ${LIBFT_DIR} -o $@
 
 test: ${NAME} ${TEST}
+	./${TEST}
+
+time: test
 	time -l ./${TEST}
 
 # **************************************************************************** #

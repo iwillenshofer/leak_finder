@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zone_lst_sort.c                                    :+:      :+:    :+:   */
+/*   zone_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/10 12:01:41 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/21 19:11:30 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	zone_sort(void)
 	head = g_zones;
 	while (head && head->next)
 	{
-		if (head < head->next)
+		if (head > head->next)
 		{
 			swap(head);
 			head = g_zones;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zone_lst_add.c                                     :+:      :+:    :+:   */
+/*   zone_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/17 15:34:17 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:39:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,18 @@
 ** - one t_zone size, and one or 100 t_alloc sizes (as in rule 2)
 */
 
-size_t get_paginated_size(size_t size)
+size_t	get_paginated_size(size_t size)
 {
-	size_t amount;
-	size_t total_size;
-	size_t pagesize;
+	size_t	amount;
+	size_t	total_size;
+	size_t	pagesize;
 
 	pagesize = getpagesize();
-	amount = (size > MEDIUM_LIMIT) ? 1 : 100;
-	total_size = _aligned_size(sizeof(t_zone)) + amount * (_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
+	amount = 1;
+	if (size <= MEDIUM_LIMIT)
+		amount = 100;
+	total_size = _aligned_size(sizeof(t_zone)) + amount
+		* (_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
 	if (size > MEDIUM_LIMIT)
 		total_size += size;
 	else if (size > TINY_LIMIT)
@@ -43,26 +46,27 @@ size_t get_paginated_size(size_t size)
 /*
 ** Allocation only happens on zone level.
 */
-void    *allocate(size_t size)
+void	*allocate(size_t size)
 {
-	void *ptr;
-	/*
-	** TODO: SOME ERROR TREATMENT HERE, IN CASE ALLOCATION WAS NOT SUCCESSFULL.
-	*/
-	ptr = mmap ( NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0 );
+	void	*ptr;
+
+	ptr = mmap (NULL, size,
+			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	return (ptr);
 }
 
 /*
 ** size is only used for LARGE allocs
 ** otherwise, type is used to determine the size of allocation.
+** 1. create zone memory 
+** 2. set up zone structure
+** 3. add to the end of g_zones.
 */
-t_zone *zone_add(char type, size_t size)
+t_zone	*zone_add(char type, size_t size)
 {
-	/*1. create zone memory */
-	t_zone *ptr;
-	t_zone *head;
-	size_t total_size;
+	t_zone	*ptr;
+	t_zone	*head;
+	size_t	total_size;
 
 	if (type == MEDIUM)
 		size = MEDIUM_LIMIT;
@@ -70,12 +74,9 @@ t_zone *zone_add(char type, size_t size)
 		size = TINY_LIMIT;
 	total_size = get_paginated_size(size);
 	ptr = allocate(total_size);
-	
-	/*2. set up zone structure*/
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
 	ptr->size = total_size;
 	ptr->type = type;
-	/*3. add to the end of g_zones.*/
 	if (g_zones == NULL)
 		g_zones = ptr;
 	else
@@ -86,5 +87,6 @@ t_zone *zone_add(char type, size_t size)
 		head->next = ptr;
 		ptr->prev = head;
 	}
+	zone_sort();
 	return (ptr);
 }

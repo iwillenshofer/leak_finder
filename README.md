@@ -17,3 +17,25 @@ TODO:
 > a = malloc;
 > b = malloc;
 > 
+
+
+`TODO:
+Realloc is not reinserting... example:
+nt main (void)
+{
+	char *alloc;
+	char *alloc2;
+
+	alloc = malloc(16 * 6);
+	*alloc = '0';
+	alloc2 = malloc(18);
+	*alloc2 = '0';
+	alloc = realloc(alloc, 16 * 2);
+	alloc = malloc(16*2);
+	show_alloc_mem_ex();
+	free(alloc);
+	return (0);
+}
+
+
+
