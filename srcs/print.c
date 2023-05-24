@@ -33,26 +33,41 @@ char	_is_allocation(t_alloc *alloc, void *addr)
 
 void	_clear_buffer(char* s)
 {
-	size_t i;
-
-	i = 0;
-	while (i <= PRINT_COLUMNS)
-	{
-		ft_bzero(s[i]);
-		i++;
-	}
+	ft_bzero(s, PRINT_COLUMNS);
 }
 
 void	_print_buffer(char* s)
 {
 	size_t i;
-
+	int		color;
+	color = BLACK;
+	ft_color(BLACK, REGULAR);
 	i = 0;
+	ft_putstr("  ");
 	while (i <= PRINT_COLUMNS)
 	{
-		ft_bzero(s[i]);
+		if (ft_isprint(s[i]))
+		{
+			if (color != WHITE)
+			{
+				color = WHITE;
+				ft_color(WHITE, REGULAR);
+			}
+			ft_putchar(s[i]);
+		}
+		else
+		{
+			if (color != BLACK)
+			{
+				color = BLACK;
+				ft_color(BLACK, REGULAR);
+			}
+			ft_putchar('.');	
+		}
 		i++;
 	}
+	ft_color(RESET, REGULAR);
+	ft_putchar('\n');
 }
 
 void	_print_zone_hex(t_zone *zone)
@@ -61,7 +76,7 @@ void	_print_zone_hex(t_zone *zone)
 	t_alloc	*next_alloc;
 	char	buffer[PRINT_COLUMNS + 1];
 
-	_clear_buffer(&buffer);
+	_clear_buffer((char*)&buffer);
 	addr = (char*)zone;
 	next_alloc = zone->allocs;
 	while (addr < (char*)(zone) + zone->size)
@@ -88,9 +103,10 @@ void	_print_zone_hex(t_zone *zone)
 		if (!((addr - (char*)zone) % ALIGNMENT))
 			ft_putchar(' ');
 		ft_puthexbyte(*addr);
+		buffer[(addr - (char*)zone) % PRINT_COLUMNS] = *addr;
 		addr++;
 		if (!((addr - (char*)zone) % PRINT_COLUMNS))
-			ft_putchar('\n');
+			_print_buffer((char*)&buffer);
 		else
 			ft_putchar(' ');
 		ft_color(RESET, REGULAR);

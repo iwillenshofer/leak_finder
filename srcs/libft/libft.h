@@ -32,6 +32,9 @@
 # define ITALIC 3
 # define UNDERLINE 4
 
+# define TRUE 1
+# define FALSE 0
+
 void	ft_color(size_t color, size_t bold);
 void	ft_putchar(char c);
 void	ft_puthex(size_t nb);
@@ -41,5 +44,6 @@ size_t	ft_strlen(const char *s);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_puthexbyte(unsigned char c);
-char	ft_isprint(unsigned char c);
+char	ft_isprint(char c);
+
 #endif

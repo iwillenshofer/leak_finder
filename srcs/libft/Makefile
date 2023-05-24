@@ -24,7 +24,8 @@ SRCS =  ft_color.c \
 			ft_strlen.c \
 			ft_bzero.c \
 			ft_memcpy.c \
-			ft_puthex_byte.c
+			ft_puthex_byte.c \
+			ft_isprint.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

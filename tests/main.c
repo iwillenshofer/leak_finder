@@ -16,6 +16,17 @@
 
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
+void	ft_strcpy(char *dst, char *src)
+{
+	while (*src)
+	{
+		*dst = *src;
+		src++;
+		dst++;
+	}
+	*dst = *src;
+}
+
 int main (void)
 {
 	char *alloc;
@@ -23,8 +34,12 @@ int main (void)
 	(void)alloc2;
 	int i = 0;
 	while (i++ < 1000)
+	{
 		alloc = malloc(513);
-/*	*alloc = '0';
+		ft_strcpy(alloc, "hello");
+	}
+/*	
+*alloc = '0';
 	alloc2 = malloc(18);
 	*alloc2 = '0';
 	alloc = realloc(alloc, 16 * 2);
@@ -34,15 +49,6 @@ int main (void)
 	return (0);
 }
 
-void	ft_strcpy(char *dst, char *src)
-{
-	while (*src)
-	{
-		*dst = *src;
-		src++;
-	}
-	*dst = *src;
-}
 
 void* thread_function(void *arg)
 {
