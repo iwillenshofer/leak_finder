@@ -22,7 +22,7 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1# -fsanitize=address -g
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1 -fsanitize=address -g
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./build

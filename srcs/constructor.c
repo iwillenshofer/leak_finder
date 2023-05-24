@@ -19,7 +19,7 @@
 void	_constructor(void)
 {
 	create_mutex();
-	zone_add(TINY, 0);
+	/*zone_add(TINY, 0);*/
 	zone_add(MEDIUM, 0);
 }
 

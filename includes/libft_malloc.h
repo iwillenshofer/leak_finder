@@ -23,7 +23,7 @@
 # define MEDIUM 1
 # define LARGE 2
 
-# define TINY_LIMIT 500
+# define TINY_LIMIT 512
 # define MEDIUM_LIMIT 1024
 
 # define ALIGNMENT 16
@@ -32,6 +32,7 @@
 # define TRUE 1
 # define FALSE 2
 
+# define PRINT_COLUMNS 64
 
 /*
 ** Linked List Structure for ALLOC - 2nd level

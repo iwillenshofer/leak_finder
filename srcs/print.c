@@ -31,11 +31,37 @@ char	_is_allocation(t_alloc *alloc, void *addr)
 	(void)addr;
 }
 
+void	_clear_buffer(char* s)
+{
+	size_t i;
+
+	i = 0;
+	while (i <= PRINT_COLUMNS)
+	{
+		ft_bzero(s[i]);
+		i++;
+	}
+}
+
+void	_print_buffer(char* s)
+{
+	size_t i;
+
+	i = 0;
+	while (i <= PRINT_COLUMNS)
+	{
+		ft_bzero(s[i]);
+		i++;
+	}
+}
+
 void	_print_zone_hex(t_zone *zone)
 {
 	char	*addr;
 	t_alloc	*next_alloc;
+	char	buffer[PRINT_COLUMNS + 1];
 
+	_clear_buffer(&buffer);
 	addr = (char*)zone;
 	next_alloc = zone->allocs;
 	while (addr < (char*)(zone) + zone->size)
@@ -54,14 +80,16 @@ void	_print_zone_hex(t_zone *zone)
 			ft_color(WHITE, FAINT);
 		if (next_alloc && addr + 1 == (char*)(next_alloc->next))
 			next_alloc = next_alloc->next;
-		if (!((addr - (char*)zone) % 16))
+		if (!((addr - (char*)zone) % PRINT_COLUMNS)) 
 		{
 			ft_puthex((size_t)(addr));
 			ft_putchar(' ');
 		}
+		if (!((addr - (char*)zone) % ALIGNMENT))
+			ft_putchar(' ');
 		ft_puthexbyte(*addr);
 		addr++;
-		if (!((addr - (char*)zone) % 16))
+		if (!((addr - (char*)zone) % PRINT_COLUMNS))
 			ft_putchar('\n');
 		else
 			ft_putchar(' ');
@@ -181,7 +209,7 @@ void	_print_free_bytes(t_zone *zone)
 	ft_putnbr(free);
 	ft_putstr(" free bytes. ");
 	ft_color(RED, REGULAR);
-	ft_putnbr(free - zone->size);
+	ft_putnbr(zone->size - free);
 	ft_putstr(" used bytes. ");
 	ft_color(YELLOW, REGULAR);
 	ft_putnbr(count);

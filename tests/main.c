@@ -21,7 +21,9 @@ int main (void)
 	char *alloc;
 	char *alloc2;
 	(void)alloc2;
-	alloc = malloc(496);
+	int i = 0;
+	while (i++ < 1000)
+		alloc = malloc(513);
 /*	*alloc = '0';
 	alloc2 = malloc(18);
 	*alloc2 = '0';

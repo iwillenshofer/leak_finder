@@ -24,18 +24,19 @@ char	*_endalloc(t_alloc *alloc)
 
 char	_is_space_middle_alloc(t_alloc *head, size_t size)
 {
-	return (head->next && (char *)(head->next) > (char *)(head)
+	return (head->next && (char *)(head->next) >= (char *)(head)
 		+ (_aligned_size(sizeof(t_alloc)) * 2) + head->size + size);
 }
 
 char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size)
 {
+
 	return (!(head->next) && ((char *)(zone)
-		+ zone->size > _endalloc(head)) * 2 + head->size + size);
+		+ zone->size >= _endalloc(head) + _aligned_size(sizeof(t_alloc)) + head->size + size));
 }
 
 char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size)
 {
-	return (head && head > (t_alloc *)(_endzone(zone)
+	return (head && head >= (t_alloc *)(_endzone(zone)
 		+ _aligned_size(sizeof(t_alloc)) + size));
 }

@@ -14,9 +14,7 @@
 
 char	ft_isprint(unsigned char c)
 {
-	if (c >= 32 && c <= 126)
-	{
+	if (c >= ' ' && c <= '~')
 		return (TRUE);
-	}
 	return (FALSE);
 }
