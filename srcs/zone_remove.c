@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   zone_remove.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/19 14:19:23 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 void	deallocate(t_zone *zone)
 {

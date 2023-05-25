@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_realloc_helpers.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:01:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 17:23:36 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 char	_is_space_realloc_middle(t_alloc *alloc, size_t size)
 {

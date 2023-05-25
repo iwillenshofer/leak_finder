@@ -6,14 +6,13 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 11:41:47 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:25:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
-#include "libft_malloc.h"
-#define THREADS 100
+#include "malloc.h"
 
+#define THREADS 100
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
 int main (void)
@@ -44,7 +43,7 @@ int main (void)
 	*alloc2 = '0';
 	alloc = realloc(alloc, 16 * 2);
 	alloc = malloc(16*2);*/
-	show_alloc_mem_ex();
+	show_alloc_mem();
 	free(alloc);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   thread_safe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:51:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 17:03:07 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 void	create_mutex(void)
 {

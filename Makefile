@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/22 10:51:02 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/25 18:24:17 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1 -fsanitiz
 SRC_DIR = ./srcs
 OBJ_DIR = ./build
 INC_DIR = ./includes
-INCLUDES = ${INC_DIR}/libft_malloc.h
+INCLUDES = ${INC_DIR}/malloc.h
 
 SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/zone_add.c \
@@ -38,7 +38,8 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/alloc_remove.c \
 		${SRC_DIR}/alloc_realloc.c \
 		${SRC_DIR}/alloc_realloc_helpers.c \
-		${SRC_DIR}/print.c \
+		${SRC_DIR}/show_mem.c \
+		${SRC_DIR}/show_mem_hex.c \
 		${SRC_DIR}/constructor.c \
 		${SRC_DIR}/alignment.c \
 		${SRC_DIR}/thread_safe.c

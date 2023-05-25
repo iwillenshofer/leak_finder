@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/19 14:17:57 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 /*
 ** dettaches allocation from list, and deallocates zone, if it is now empty.

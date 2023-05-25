@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   malloc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 11:41:34 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:17:44 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#ifndef MALLOC_H
+# define MALLOC_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -27,14 +27,14 @@
 # define MEDIUM_LIMIT 1024
 
 # define ALIGNMENT 16
-# define PROTECTED 8
+# define PROTECTED 0
 
 # define DEBUG 1
 
 # define TRUE 1
 # define FALSE 0
 
-# define PRINT_COLUMNS 32
+# define PRINT_COLUMNS 80
 
 /*
 ** Linked List Structure for ALLOC - 2nd level

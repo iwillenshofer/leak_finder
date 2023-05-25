@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:11:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 16:24:14 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 t_zone	*g_zones = NULL;
 

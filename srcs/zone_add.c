@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 10:51:24 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:27:13 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "malloc.h"
 
 /*
 ** get_paginated_size makes sure the size requested to mmap is:
@@ -75,7 +75,6 @@ t_zone	*zone_add(char type, size_t size)
 	total_size = get_paginated_size(size);
 	ptr = allocate(total_size);
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
-	ft_memset(&(ptr->protect), '*', PROTECTED);
 	ptr->size = total_size;
 	ptr->type = type;
 	if (g_zones == NULL)
