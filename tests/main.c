@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/22 10:59:06 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:29:32 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@
 
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
-void	ft_strcpy(char *dst, char *src)
-{
-	while (*src)
-	{
-		*dst = *src;
-		src++;
-		dst++;
-	}
-	*dst = *src;
-}
-
 int main (void)
 {
 	char *alloc;
 	char *alloc2;
 	(void)alloc2;
 	int i = 0;
+	int z = 0;
 	while (i++ < 1000)
 	{
-		alloc = malloc(513);
-		ft_strcpy(alloc, "hello");
+		alloc = malloc(TINY_LIMIT);
+		z = 0;
+		while (z < TINY_LIMIT)
+		{
+			alloc[z++] = '-';
+		}	
+		z = 0;
+		alloc[TINY_LIMIT - 1]='X';
 	}
-/*	
+	alloc = malloc(1);
+	alloc = malloc(1);
+	alloc = malloc(1);
+	alloc = malloc(85-32);
+	/*	
 *alloc = '0';
 	alloc2 = malloc(18);
 	*alloc2 = '0';

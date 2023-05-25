@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 16:22:05 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:49:53 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ char	get_type(size_t size)
 
 t_alloc	*_newalloc(t_alloc *pos, t_alloc *prev, t_alloc *next, size_t size)
 {
+	ft_memset(&(pos->protect), '*', PROTECTED);
 	pos->size = size;
-	pos->ptr = ((char *)pos + sizeof(t_alloc));
+	pos->ptr = ((char *)pos + _aligned_size(sizeof(t_alloc)));
 	pos->prev = NULL;
 	pos->next = NULL;
 	if (prev)

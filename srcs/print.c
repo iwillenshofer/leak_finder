@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/22 10:50:49 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:23:26 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	_print_buffer(char* s)
 	ft_color(BLACK, REGULAR);
 	i = 0;
 	ft_putstr("  ");
-	while (i <= PRINT_COLUMNS)
+	while (i < PRINT_COLUMNS)
 	{
 		if (ft_isprint(s[i]))
 		{
@@ -100,7 +100,7 @@ void	_print_zone_hex(t_zone *zone)
 			ft_puthex((size_t)(addr));
 			ft_putchar(' ');
 		}
-		if (!((addr - (char*)zone) % ALIGNMENT))
+		if (ALIGNMENT > 1 && !((addr - (char*)zone) % ALIGNMENT))
 			ft_putchar(' ');
 		ft_puthexbyte(*addr);
 		buffer[(addr - (char*)zone) % PRINT_COLUMNS] = *addr;
@@ -185,7 +185,6 @@ void	_print_zones(void)
 
 void	_print_alloc_ex(t_alloc *alloc)
 {
-	ft_putchar(' ');
 	if (DEBUG)
 	{
 		ft_color(BLACK, FAINT);
@@ -211,6 +210,12 @@ void	_print_free_bytes(t_zone *zone)
 	size_t count;
 	t_alloc *allocs;
 
+
+	ft_putstr("ALLOC SIZE:");
+	ft_putnbr(_aligned_size(sizeof(t_alloc)));
+		ft_putstr(" : ");
+	ft_putnbr((sizeof(t_alloc)));
+	ft_putchar('\n');
 	count = 0;
 	allocs = zone->allocs;
 	free = zone->size - _aligned_size(sizeof(t_zone));
