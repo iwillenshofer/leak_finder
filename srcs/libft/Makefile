@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/01 10:55:01 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/21 18:30:30 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/25 08:55:42 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS =  ft_color.c \
 			ft_bzero.c \
 			ft_memcpy.c \
 			ft_puthex_byte.c \
-			ft_isprint.c
+			ft_isprint.c \
+			ft_strcpy.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/22 08:22:35 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 09:38:06 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@
 # define MEDIUM_LIMIT 1024
 
 # define ALIGNMENT 16
+# define PROTECTED 0
+
 # define DEBUG 1
 
 # define TRUE 1
 # define FALSE 0
 
-# define PRINT_COLUMNS 64
+# define PRINT_COLUMNS 32
 
 /*
 ** Linked List Structure for ALLOC - 2nd level
@@ -45,6 +47,7 @@
 
 typedef struct s_alloc
 {
+	char			protect[PROTECTED];
 	void			*ptr;
 	size_t			size;
 	struct s_alloc	*prev;
@@ -65,6 +68,7 @@ typedef struct s_alloc
 
 typedef struct s_zone
 {
+	char			protection[ALIGNMENT];		
 	t_alloc			*allocs;
 	size_t			size;
 	char			type;
