@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 11:33:29 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:41:34 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define PRINT_COLUMNS 64
+# define PRINT_COLUMNS 32
 
 /*
 ** Linked List Structure for ALLOC - 2nd level
