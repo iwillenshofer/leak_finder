@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 18:47:18 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:51:21 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ void	_print_zone_hex(t_zone *zone)
 	next_alloc = zone->allocs;
 	while (addr < (char *)(zone) + zone->size)
 	{
-		if (addr == (char*)zone)
+		if (addr == (char *)zone)
 			ft_color(WHITE, BOLD);
-		else if (addr > (char *)zone && next_alloc && addr < (char*)next_alloc)
+		else if (addr > (char *)zone && next_alloc && addr < (char *)next_alloc)
 			ft_color(WHITE, REGULAR);
-		else if (next_alloc && addr == (char*)next_alloc)
+		else if (next_alloc && addr == (char *)next_alloc)
 			ft_color(CYAN, BOLD);
 		else if (next_alloc && addr > (char *)next_alloc && addr < (char *)(next_alloc->ptr))
 			ft_color(CYAN, REGULAR);
@@ -84,20 +84,20 @@ void	_print_zone_hex(t_zone *zone)
 			ft_color(CYAN, FAINT);
 		else
 			ft_color(WHITE, FAINT);
-		if (next_alloc && addr + 1 == (char*)(next_alloc->next))
+		if (next_alloc && addr + 1 == (char *)(next_alloc->next))
 			next_alloc = next_alloc->next;
-		if (!((addr - (char *)zone) % PRINT_COLUMNS)) 
+		if (!((addr - (char *)zone) % PRINT_COLUMNS))
 		{
 			ft_puthex((size_t)(addr));
 			ft_putchar(' ');
 		}
-		if (ALIGNMENT > 1 && !((addr - (char*)zone) % ALIGNMENT))
+		if (ALIGNMENT > 1 && !((addr - (char *)zone) % ALIGNMENT))
 			ft_putchar(' ');
 		ft_puthexbyte(*addr);
 		buffer[(addr - (char *)zone) % PRINT_COLUMNS] = *addr;
 		addr++;
 		if (!((addr - (char *)zone) % PRINT_COLUMNS))
-			_print_buffer((char*)&buffer);
+			_print_buffer((char *)&buffer);
 		else
 			ft_putchar(' ');
 		ft_color(RESET, REGULAR);
@@ -124,13 +124,13 @@ void	_print_alloc_ex(t_alloc *alloc)
 
 void	_print_free_bytes(t_zone *zone)
 {
-	size_t free;
-	size_t count;
-	t_alloc *allocs;
+	size_t	free;
+	size_t	count;
+	t_alloc	*allocs;
 
 	ft_putstr("ALLOC SIZE:");
 	ft_putnbr(_aligned_size(sizeof(t_alloc)));
-		ft_putstr(" : ");
+	ft_putstr(" : ");
 	ft_putnbr((sizeof(t_alloc)));
 	ft_putchar('\n');
 	count = 0;
