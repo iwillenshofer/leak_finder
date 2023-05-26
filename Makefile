@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/26 08:21:26 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/26 17:07:34 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/alloc_realloc_helpers.c \
 		${SRC_DIR}/show_mem.c \
 		${SRC_DIR}/show_mem_hex.c \
+		${SRC_DIR}/show_mem_colors.c \
+		${SRC_DIR}/show_mem_buffer.c \
 		${SRC_DIR}/constructor.c \
 		${SRC_DIR}/alignment.c \
 		${SRC_DIR}/thread_safe.c

@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/01 10:55:01 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/25 11:42:27 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/26 12:11:30 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,17 @@
 
 NAME = libft.a
 
-SRCS =  ft_color.c \
-			ft_putchar.c \
-			ft_puthex.c \
-			ft_putnbr.c \
-			ft_putstr.c \
-			ft_strlen.c \
-			ft_bzero.c \
-			ft_memcpy.c \
-			ft_puthex_byte.c \
-			ft_isprint.c \
-			ft_strcpy.c \
-			ft_memset.c
+SRCS =  ft_putchar.c \
+		ft_puthex.c \
+		ft_putnbr.c \
+		ft_putstr.c \
+		ft_strlen.c \
+		ft_bzero.c \
+		ft_memcpy.c \
+		ft_puthex_byte.c \
+		ft_isprint.c \
+		ft_strcpy.c \
+		ft_memset.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

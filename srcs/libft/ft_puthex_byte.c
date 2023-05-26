@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthex_byte.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:30:03 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 18:30:04 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:33:07 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_puthexbyte(unsigned char c)
 
 	n1 = c / 16;
 	n2 = c % 16;
+	ft_putchar(' ');
 	_print_hex_byte(n1);
 	_print_hex_byte(n2);
 }

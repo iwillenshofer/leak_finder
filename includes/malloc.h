@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 14:17:44 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:09:21 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,32 @@
 # define TRUE 1
 # define FALSE 0
 
-# define PRINT_COLUMNS 80
+# define PRINT_COLUMNS 64
+
+/*
+** color definitions for show_mem_ex
+*/
+# define BLACK 30
+# define RED 31
+# define GREEN 32
+# define YELLOW 33
+# define BLUE 34
+# define PURPLE 35
+# define CYAN 36
+# define WHITE 37
+# define RESET 0
+
+# define REGULAR 0
+# define BOLD 1
+# define FAINT 2
+# define ITALIC 3
+# define UNDERLINE 4
+
+typedef struct s_color
+{
+    char color;
+    char options;
+}   t_color;
 
 /*
 ** Linked List Structure for ALLOC - 2nd level
@@ -76,6 +101,9 @@ typedef struct s_zone
 	struct s_zone	*next;
 }	t_zone;
 
+/*
+** global variables for zones (allocations) and thread safe.
+*/
 t_zone			*g_zones;
 pthread_mutex_t	g_mutex;
 
@@ -121,6 +149,14 @@ char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_realloc_middle(t_alloc *alloc, size_t size);
 char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size);
 
+/*
+** show_mem_hex
+*/
+void	_put_color(char new_color, char new_opt, t_color *current);
+void	_print_buffer(char *s, t_color *color);
+void	_clear_buffer(char *s);
+void	_print_addr_type_color(t_zone *zone, char *addr,
+	t_alloc *next_alloc, t_color *color);
 /*
 ** constructor && destructor 
 */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 08:23:01 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:08:33 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,29 @@ void	*allocate(size_t size)
 {
 	void	*ptr;
 
-	return (NULL);/*take this out of here*/
 	ptr = mmap (NULL, size,
 			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	return (ptr);
+}
+
+/*
+** places the newly created zone in the head (g_zone)
+** if the list is still empty, or at the end of it (last element).
+*/
+void zone_place_new(t_zone *ptr)
+{
+	t_zone	*head;
+
+	if (g_zones == NULL)
+		g_zones = ptr;
+	else
+	{
+		head = g_zones;
+		while (head->next)
+			head = head->next;
+		head->next = ptr;
+		ptr->prev = head;
+	}
 }
 
 /*
@@ -66,7 +85,6 @@ void	*allocate(size_t size)
 t_zone	*zone_add(char type, size_t size)
 {
 	t_zone	*ptr;
-	t_zone	*head;
 	size_t	total_size;
 
 	if (type == MEDIUM)
@@ -80,16 +98,7 @@ t_zone	*zone_add(char type, size_t size)
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
 	ptr->size = total_size;
 	ptr->type = type;
-	if (g_zones == NULL)
-		g_zones = ptr;
-	else
-	{
-		head = g_zones;
-		while (head->next)
-			head = head->next;
-		head->next = ptr;
-		ptr->prev = head;
-	}
+	zone_place_new(ptr);
 	zone_sort();
 	return (ptr);
 }

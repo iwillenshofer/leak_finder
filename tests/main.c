@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 08:19:51 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:38:49 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 #define THREADS 100
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
-int main (void)
+int main3 (void)
 {
 	char *alloc;
 
 	alloc = malloc(100);
 	printf("%p\n", alloc);
+	return (0);
 }
 
-int main3 (void)
+int main (void)
 {
 	char *alloc;
 	char *alloc2;
@@ -52,7 +53,7 @@ int main3 (void)
 	*alloc2 = '0';
 	alloc = realloc(alloc, 16 * 2);
 	alloc = malloc(16*2);*/
-	show_alloc_mem();
+	show_alloc_mem_ex();
 	free(alloc);
 	return (0);
 }
