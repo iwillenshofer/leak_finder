@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_mem_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 18:51:21 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:56:28 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	_clear_buffer(char *s)
 }
 
 /*
-** changes the color of print if needed. Prints black '.' if character is not
-** printable, and the character if it is.
+** Prints black '.' if character is not
+** printable, and the white character if it is.
+** changes the color of print if needed. 
 */
 void	_print_buffer_digit(char c, int *color)
 {
@@ -43,7 +44,13 @@ void	_print_buffer_digit(char c, int *color)
 	}
 }
 
-void	_print_buffer(char *s)
+/*
+** Prints the buffer (digit representation of the hexa mem).
+** Since the colors are beeing written for the hex representation,
+** and we are changing the color here, the color is changed back to
+** the previous one.
+*/
+void	_print_buffer(char *s, int *color)
 {
 	size_t	i;
 	int		color;
@@ -104,25 +111,7 @@ void	_print_zone_hex(t_zone *zone)
 	}
 }
 
-void	_print_alloc_ex(t_alloc *alloc)
-{
-	ft_color(BLACK, FAINT);
-	ft_puthex((size_t)(alloc));
-	ft_putchar(' ');
-	ft_color(RESET, REGULAR);
-	ft_puthex((size_t)(alloc->ptr));
-	ft_putstr(" - ");
-	ft_putnbr((size_t)(alloc->ptr) + alloc->size - 1);
-	ft_putstr(" : ");
-	ft_color(GREEN, REGULAR);
-	if (alloc->size % ALIGNMENT)
-		ft_color(RED, REGULAR);
-	ft_putnbr(alloc->size);
-	ft_putstr(" bytes\n");
-	ft_color(RESET, REGULAR);
-}
-
-void	_print_free_bytes(t_zone *zone)
+void	_print_zone_information(t_zone *zone)
 {
 	size_t	free;
 	size_t	count;
@@ -163,7 +152,7 @@ void	_print_free_bytes(t_zone *zone)
 	ft_color(RESET, REGULAR);
 }
 
-void	_print_zone_ex(t_zone *zone)
+void	_print_zone(t_zone *zone)
 {
 	if (zone->type == TINY)
 		ft_putstr("TINY: ");
@@ -174,7 +163,7 @@ void	_print_zone_ex(t_zone *zone)
 	ft_puthex((size_t)zone);
 	ft_color(CYAN, REGULAR);
 	ft_putchar(' ');
-	_print_free_bytes(zone);
+	_print_zone_information(zone);
 	ft_putnbr((size_t)(zone->size));
 	ft_putstr(" bytes");
 	ft_color(RESET, REGULAR);
@@ -189,7 +178,7 @@ void	_print_zones_ex(void)
 	head = g_zones;
 	while (head)
 	{
-		_print_zone_ex(head);
+		_print_zone(head);
 		head = head->next;
 	}
 }

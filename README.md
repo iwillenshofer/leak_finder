@@ -39,5 +39,6 @@ nt main (void)
 
 
 
---> Determine the correct minimum size (LIMIT)
+--> Determine the correct minimum size (LIMIT) [DONE]
 
+--> test realloc extensivelly!!!

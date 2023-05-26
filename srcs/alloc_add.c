@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:31:18 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,11 @@ t_alloc	*alloc_add(size_t size)
 	if (!(allocated))
 	{
 		zone = zone_add(type, size);
-		allocated = find_spot(zone, size);
 		if (zone)
+		{
+			allocated = find_spot(zone, size);
 			zone->allocs = allocated;
+		}
 	}
 	return (allocated);
 }

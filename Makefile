@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/25 18:24:17 by iwillens         ###   ########.fr        #
+#    Updated: 2023/05/26 08:21:26 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,10 +60,9 @@ LIBFT = ${LIBFT_DIR}/libft.a
 TEST = tester
 TESTS_SRC_DIR = ./tests
 TESTS_OBJ_DIR = ./tests/build
-TESTS_INCLUDES = ${TESTS_SRC_DIR}/tests.h
 
-TESTS = ${TESTS_SRC_DIR}/main.c \
-		${TESTS_SRC_DIR}/print_zone.c 
+TESTS = ${TESTS_SRC_DIR}/main.c 
+#		${TESTS_SRC_DIR}/print_zone.c 
 #		${TESTS_SRC_DIR}/test_alloc.c \
 #		${TESTS_SRC_DIR}/test_realloc.c \
 #		${TESTS_SRC_DIR}/test_free.c
@@ -97,12 +96,12 @@ ${LIBFT}:
 # *** Test Rules                                                               #
 # **************************************************************************** #
 
-${TEST}: ${NAME} ${TESTS_OBJS} ${INCLUDES} ${TESTS_INCLUDES} Makefile
+${TEST}: ${NAME} ${TESTS_OBJS} ${INCLUDES} Makefile
 	@${CC} ${CCFLAGS}  ${TESTS_OBJS} -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -I ${LIBFT_DIR} -L./ -lft_malloc -L${LIBFT_DIR} -lft -o ${TEST}
 	@echo "\033[92m${TEST} is built. \033[0m"
 	
 
-${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} ${TESTS_INCLUDES} Makefile
+${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} Makefile
 	@mkdir -p $(dir $@)
 	@${CC}  ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -I ${LIBFT_DIR} -o $@
 

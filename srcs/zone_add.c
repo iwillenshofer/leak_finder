@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 18:27:13 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:23:01 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	*allocate(size_t size)
 {
 	void	*ptr;
 
+	return (NULL);/*take this out of here*/
 	ptr = mmap (NULL, size,
 			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	return (ptr);
@@ -74,6 +75,8 @@ t_zone	*zone_add(char type, size_t size)
 		size = TINY_LIMIT;
 	total_size = get_paginated_size(size);
 	ptr = allocate(total_size);
+	if (!(ptr))
+		return (NULL);
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
 	ptr->size = total_size;
 	ptr->type = type;

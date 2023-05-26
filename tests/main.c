@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 18:25:57 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:19:51 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include  <stdio.h>
 
 #define THREADS 100
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
 int main (void)
+{
+	char *alloc;
+
+	alloc = malloc(100);
+	printf("%p\n", alloc);
+}
+
+int main3 (void)
 {
 	char *alloc;
 	char *alloc2;
