@@ -21,7 +21,7 @@ TODO:
 
 `TODO:
 Realloc is not reinserting... example:
-nt main (void)
+int main (void)
 {
 	char *alloc;
 	char *alloc2;

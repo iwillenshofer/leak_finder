@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 12:38:49 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/30 08:26:24 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,44 @@
 #define THREADS 100
 # define SENTENCE "Long text for a thread to see if it crashes\n"
 
+
+
+void* thread_function(void *arg)
+{
+	(void)arg;
+	ft_putstr(SENTENCE);
+	return (NULL);
+}
+
 int main3 (void)
 {
-	char *alloc;
-
-	alloc = malloc(100);
-	printf("%p\n", alloc);
+	int i = 0;
+	pthread_t tid[THREADS];
+	while (i < THREADS)
+	{
+		pthread_create(&(tid[i]), NULL, &thread_function, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < THREADS)
+	{
+	    pthread_join(tid[i], NULL);
+	 	i++;
+	}
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main (void)
 {
@@ -37,10 +67,7 @@ int main (void)
 		alloc = malloc(TINY_LIMIT);
 		z = 0;
 		while (z < TINY_LIMIT)
-		{
 			alloc[z++] = '-';
-		}	
-		z = 0;
 		alloc[TINY_LIMIT - 1]='X';
 	}
 	alloc = malloc(1);
@@ -59,7 +86,7 @@ int main (void)
 }
 
 
-void* thread_function(void *arg)
+void* thread_function3(void *arg)
 {
 	char *s;
 

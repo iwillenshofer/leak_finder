@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_mem_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:04:13 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 17:44:06 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:02:01 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	_print_addr_type_color(t_zone *zone, char *addr,
 {
 	if (addr == (char *)zone)
 		_put_color(WHITE, BOLD, color);
-	else if (addr > (char *)zone && next_alloc && addr < (char *)next_alloc)
+	else if (addr > (char *)zone && ((next_alloc && addr < (char *)next_alloc) || (!next_alloc && addr < ((char *)zone + _aligned_size(sizeof(t_zone))))))
 		_put_color(WHITE, REGULAR, color);
 	else if (next_alloc && addr == (char *)next_alloc)
 		_put_color(CYAN, BOLD, color);
