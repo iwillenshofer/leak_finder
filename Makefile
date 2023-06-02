@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/06/02 14:28:50 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/02 15:22:27 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,8 @@ TESTS_SRC_DIR = ./tests
 TESTS_OBJ_DIR = ./tests/build
 
 TESTS = ${TESTS_SRC_DIR}/main.c \
-		${TESTS_SRC_DIR}/program_start.c 
-#		${TESTS_SRC_DIR}/test_alloc.c \
-#		${TESTS_SRC_DIR}/test_realloc.c \
+		${TESTS_SRC_DIR}/program_start.c \
+		${TESTS_SRC_DIR}/test_realloc.c
 #		${TESTS_SRC_DIR}/test_free.c
 #
 TESTS_OBJS = $(patsubst ${TESTS_SRC_DIR}/%.c, ${TESTS_OBJ_DIR}/%.o, ${TESTS})

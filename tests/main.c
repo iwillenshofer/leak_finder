@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 12:01:05 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:18:36 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int main (void)
 {
-	test_program_start();
+	test_realloc();
 	return (0);
 }
 void* thread_function(void *arg)
