@@ -42,3 +42,7 @@ int main (void)
 --> Determine the correct minimum size (LIMIT) [DONE]
 
 --> test realloc extensivelly!!!
+
+
+> Nice mmap resouce
+> https://www.cs.uaf.edu/2017/fall/cs301/lecture/11_20_mmap.html

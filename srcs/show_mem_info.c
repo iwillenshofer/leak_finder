@@ -1,45 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_mem_hex.c                                     :+:      :+:    :+:   */
+/*   show_mem_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 17:42:22 by iwillens         ###   ########.fr       */
+/*   Created: 2023/06/02 14:24:17 by iwillens          #+#    #+#             */
+/*   Updated: 2023/06/02 14:28:54 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-/*
-** prints the whole hex representation of a zone.
-*/
-void	_print_zone_hex(t_zone *zone)
-{
-	char	*addr;
-	t_alloc	*next_alloc;
-	char	buffer[PRINT_COLUMNS + 1];
-	t_color	color;
-
-	_clear_buffer((char *)&buffer);
-	addr = (char *)zone;
-	next_alloc = zone->allocs;
-	while (addr < (char *)(zone) + zone->size)
-	{
-		_print_addr_type_color(zone, addr, next_alloc, &color);
-		if (next_alloc && addr + 1 == (char *)(next_alloc->next))
-			next_alloc = next_alloc->next;
-		if (!((addr - (char *)zone) % PRINT_COLUMNS))
-			ft_puthex((size_t)(addr));
-		if (ALIGNMENT > 1 && !((addr - (char *)zone) % ALIGNMENT))
-			ft_putchar(' ');
-		ft_puthexbyte(*addr);
-		buffer[(addr - (char *)zone) % PRINT_COLUMNS] = *addr;
-		if (!((++addr - (char *)zone) % PRINT_COLUMNS))
-			_print_buffer((char *)&buffer, &color);
-	}
-}
 
 /*
 ** helper to the _print_zone_information() function.
@@ -68,7 +39,7 @@ size_t	_calc_allocations(t_zone *zone, size_t *usedvar)
 }
 
 /*
-** lists usefull zone information, suchas total, used and free bytes.
+** lists usefull zone information, such as total, used and free bytes.
 */
 void	_print_zone_information(t_zone *zone)
 {
@@ -96,38 +67,4 @@ void	_print_zone_information(t_zone *zone)
 		ft_putstr("undetermined");
 	ft_putstr(" bytes max alloc. ");
 	ft_putchar('\n');
-}
-
-/*
-** main function to print each zone, calling information about it and
-** hex representation.
-*/
-void	_print_zone_ex(t_zone *zone)
-{
-	if (zone->type == TINY)
-		ft_putstr("TINY: ");
-	else if (zone->type == MEDIUM)
-		ft_putstr("SMALL: ");
-	else
-		ft_putstr("LARGE: ");
-	ft_puthex((size_t)zone);
-	ft_putchar(' ');
-	_print_zone_information(zone);
-	_print_zone_hex(zone);
-	_put_color(RESET, REGULAR, NULL);
-}
-
-/*
-** begin of printing zones. just a loop through all zones in the list.
-*/
-void	_print_zones_ex(void)
-{
-	t_zone	*head;
-
-	head = g_zones;
-	while (head)
-	{
-		_print_zone_ex(head);
-		head = head->next;
-	}
 }

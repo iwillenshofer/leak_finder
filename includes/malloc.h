@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/30 16:36:37 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:28:12 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MEDIUM 1
 # define LARGE 2
 
-# define TINY_LIMIT 512
+# define TINY_LIMIT 256
 # define MEDIUM_LIMIT 1024
 
 # define ALIGNMENT 16
@@ -157,10 +157,12 @@ void	_print_buffer(char *s, t_color *color);
 void	_clear_buffer(char *s);
 void	_print_addr_type_color(t_zone *zone, char *addr,
 	t_alloc *next_alloc, t_color *color);
+void	_print_zone_information(t_zone *zone);
+
 /*
 ** constructor && destructor 
 */
-void	_constructor(void) __attribute__((constructor));
-void	_destructor(void) __attribute__((destructor));
+void	_constructor(void) __attribute__((constructor (101)));
+void	_destructor(void) __attribute__((destructor (101)));
 
 #endif

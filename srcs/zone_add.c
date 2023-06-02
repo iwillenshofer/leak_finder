@@ -6,12 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 18:08:33 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:18:04 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
 /*
 ** get_paginated_size makes sure the size requested to mmap is:
 ** 1. multiple of getpagesize() - this applies to all cases
@@ -59,7 +58,7 @@ void	*allocate(size_t size)
 ** places the newly created zone in the head (g_zone)
 ** if the list is still empty, or at the end of it (last element).
 */
-void zone_place_new(t_zone *ptr)
+void	zone_place_new(t_zone *ptr)
 {
 	t_zone	*head;
 

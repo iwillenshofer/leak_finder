@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/30 10:29:49 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/02 14:28:50 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,10 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/alloc_realloc.c \
 		${SRC_DIR}/alloc_realloc_helpers.c \
 		${SRC_DIR}/show_mem.c \
-		${SRC_DIR}/show_mem_hex.c \
+		${SRC_DIR}/show_mem_ex.c \
 		${SRC_DIR}/show_mem_colors.c \
 		${SRC_DIR}/show_mem_buffer.c \
+		${SRC_DIR}/show_mem_info.c \
 		${SRC_DIR}/constructor.c \
 		${SRC_DIR}/alignment.c \
 		${SRC_DIR}/thread_safe.c
@@ -63,8 +64,8 @@ TEST = tester
 TESTS_SRC_DIR = ./tests
 TESTS_OBJ_DIR = ./tests/build
 
-TESTS = ${TESTS_SRC_DIR}/main.c 
-#		${TESTS_SRC_DIR}/print_zone.c 
+TESTS = ${TESTS_SRC_DIR}/main.c \
+		${TESTS_SRC_DIR}/program_start.c 
 #		${TESTS_SRC_DIR}/test_alloc.c \
 #		${TESTS_SRC_DIR}/test_realloc.c \
 #		${TESTS_SRC_DIR}/test_free.c
