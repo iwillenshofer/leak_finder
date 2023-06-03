@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 14:18:04 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:18:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,19 @@ size_t	get_paginated_size(size_t size)
 /*
 ** Allocation only happens on zone level.
 */
+
+size_t allocated = 0;
+
 void	*allocate(size_t size)
 {
 	void	*ptr;
 
 	ptr = mmap (NULL, size,
 			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if(ptr != MAP_FAILED)
+		allocated++;
+	if (ptr == MAP_FAILED)
+		return (NULL);
 	return (ptr);
 }
 

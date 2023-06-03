@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:46:05 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 15:31:50 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:10:49 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,12 @@ t_alloc	*resize(t_alloc *alloc, size_t size)
 }
 
 /*
-** case 0: if types are different, new allocation will occur!
-** case 1: single allocated with space in zone (zone-type and
-**  new size must match).
+** case 1: if types are different, new allocation will occur!
+** case 2: shrinking size.
+** case 3: there is space between current allocation and next allocation.
+** case 4: there is no next allocation, and there is space at the end of the zone.
+** else : there is no space for reallocation. Must reallocate.
+** all in all, cases 2, 3 and 4 will just resize. Otherwise, reallocate.
 */
 t_alloc	*alloc_realloc(void *ptr, size_t size)
 {

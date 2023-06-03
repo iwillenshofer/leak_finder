@@ -6,27 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 21:55:04 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 14:17:48 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:19:38 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-size_t	_count_zone_bytype(char type)
-{
-	t_zone	*head;
-	size_t	count;
-
-	count = 0;
-	head = g_zones;
-	while (head)
-	{
-		if (head->type == type)
-			count++;
-		head = head->next;
-	}
-	return (count);
-}
 
 /*
 ** constructs preallocated memory regions for
@@ -56,4 +40,10 @@ void	_destructor(void)
 			zone_remove(head);
 		head = next;
 	}
+	ft_putstr("DESTRUCTOR\nTotal allocated: ");
+	ft_putnbr(allocated);
+	ft_putstr("\n");
+	ft_putstr("Total deallocated: ");
+	ft_putnbr(deallocated);
+	ft_putstr("\n");
 }

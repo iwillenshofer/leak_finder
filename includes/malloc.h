@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 14:28:12 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:18:35 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ typedef struct s_zone
 t_zone			*g_zones;
 pthread_mutex_t	g_mutex;
 
+size_t allocated; /* TESTING!!! */
+size_t deallocated; /* TESTING!!! */
+
 void	free(void *ptr)
 		__attribute__ ((visibility ("default")));
 
@@ -123,6 +126,7 @@ void	show_alloc_mem_ex(void)
 		__attribute__ ((visibility ("default")));
 
 t_zone	*zone_add(char type, size_t size);
+
 void	zone_remove(t_zone *zone);
 void	zone_sort(void);
 t_alloc	*alloc_add(size_t size);
@@ -148,6 +152,7 @@ char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_realloc_middle(t_alloc *alloc, size_t size);
 char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size);
+size_t	_count_zone_bytype(char type);
 
 /*
 ** show_mem_hex
