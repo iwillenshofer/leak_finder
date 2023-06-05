@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/06/05 12:27:57 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/05 15:21:11 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/show_mem_buffer.c \
 		${SRC_DIR}/show_mem_info.c \
 		${SRC_DIR}/alignment.c \
+		${SRC_DIR}/constructor.c \
 		${SRC_DIR}/thread_safe.c
 
 

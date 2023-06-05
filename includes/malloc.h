@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 12:34:44 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:22:22 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_realloc_middle(t_alloc *alloc, size_t size);
 char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size);
+size_t	_count_zone_bytype(char type);
 
 /*
 ** show_mem_hex
@@ -154,5 +155,11 @@ void	_clear_buffer(char *s);
 void	_print_addr_type_color(t_zone *zone, char *addr,
 	t_alloc *next_alloc, t_color *color);
 void	_print_zone_information(t_zone *zone);
+
+/*
+** constructor && destructor 
+*/
+void	_constructor(void) __attribute__((constructor (101)));
+void	_destructor(void) __attribute__((destructor (101)));
 
 #endif
