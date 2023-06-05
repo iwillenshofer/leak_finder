@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 16:03:16 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:29:26 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	free_alloc(t_alloc *alloc, t_zone *zone)
 		alloc->next->prev = alloc->prev;
 	if (zone->allocs == alloc)
 		zone->allocs = alloc->next;
-	if (!(alloc->next) && !(alloc->prev)
-			&& (zone-> type == LARGE || _count_zone_bytype(zone->type) > 1))
+	if (!(alloc->next) && !(alloc->prev))
 		zone_remove(zone);
 }
 

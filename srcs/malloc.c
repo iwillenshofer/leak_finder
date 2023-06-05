@@ -6,14 +6,14 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:11:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 17:48:27 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 11:46:48 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 t_zone			*g_zones = NULL;
-pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
+/*pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;*/
 
 void	free(void *ptr)
 {

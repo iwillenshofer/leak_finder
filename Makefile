@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/06/03 19:15:31 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/05 12:27:57 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -fsanitize=address -g
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -fno-stack-protector -g
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./build
@@ -43,7 +43,6 @@ SRCS = ${SRC_DIR}/malloc.c \
 		${SRC_DIR}/show_mem_colors.c \
 		${SRC_DIR}/show_mem_buffer.c \
 		${SRC_DIR}/show_mem_info.c \
-		${SRC_DIR}/constructor.c \
 		${SRC_DIR}/alignment.c \
 		${SRC_DIR}/thread_safe.c
 
@@ -69,7 +68,7 @@ TESTS = ${TESTS_SRC_DIR}/main.c \
 		${TESTS_SRC_DIR}/test_realloc.c \
 		${TESTS_SRC_DIR}/test_realloc_bounderies.c \
 		${TESTS_SRC_DIR}/test_malloc.c
-#
+
 TESTS_OBJS = $(patsubst ${TESTS_SRC_DIR}/%.c, ${TESTS_OBJ_DIR}/%.o, ${TESTS})
 
 # **************************************************************************** #
@@ -79,7 +78,8 @@ TESTS_OBJS = $(patsubst ${TESTS_SRC_DIR}/%.c, ${TESTS_OBJ_DIR}/%.o, ${TESTS})
 all: ${NAME}
 
 ${NAME}: ${LIBFT} ${OBJS} ${INCLUDES} Makefile
-	@gcc ${CCFLAGS} ${OBJS}  -L./srcs/libft -lft -fPIC -shared -o ${NAME}
+	@gcc ${CCFLAGS} ${OBJS}  -L./srcs/libft -lft -shared -o ${NAME}
+	@strip -x ${NAME}
 	@rm -f ${SYMLINK}
 	@ln -s ${NAME} ${SYMLINK}
 	@echo "\033[96m${NAME} is built. \033[0m"
@@ -127,5 +127,20 @@ fclean: clean
 	@make -C ${LIBFT_DIR} fclean
 
 re: fclean all
+
+
+SRCS_EMPTY_DIR = ./
+OBJS_EMPTY_DIR = ./build
+SRCS_EMPTY = ${SRCS_EMPTY_DIR}/empty.c
+OBJS_EMPTY = $(patsubst ${SRCS_EMPTY_DIR}/%.c, ${OBJS_EMPTY_DIR}/%.o, ${SRCS_EMPTY})
+
+empty: ${OBJS_EMPTY} Makefile
+	@gcc ${CCFLAGS} ${OBJS_EMPTY} -shared -o empty.so
+	@echo "\033[96mempty.so is built. \033[0m"
+
+${OBJS_EMPTY_DIR}/%.o: ${SRCS_EMPTY_DIR}/%.c  Makefile
+	@mkdir -p $(dir $@)
+	@${CC} ${CCFLAGS} -MMD -c $< -I. -I./srcs/libft -o $@ ${LDFLAGS}
+
 
 -include $(DEPENDS)

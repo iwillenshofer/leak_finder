@@ -6,15 +6,13 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 18:18:35 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:30:02 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
-# include <stdlib.h>
-# include <unistd.h>
 # include <sys/mman.h>
 # include <pthread.h>
 # include "../srcs/libft/libft.h"
@@ -27,7 +25,6 @@
 # define MEDIUM_LIMIT 1024
 
 # define ALIGNMENT 16
-# define PROTECTED 0
 
 # define DEBUG 1
 
@@ -72,7 +69,6 @@ typedef struct s_color
 
 typedef struct s_alloc
 {
-	char			protect[PROTECTED];
 	void			*ptr;
 	size_t			size;
 	struct s_alloc	*prev;
@@ -93,7 +89,6 @@ typedef struct s_alloc
 
 typedef struct s_zone
 {
-	char			protect[PROTECTED];		
 	t_alloc			*allocs;
 	size_t			size;
 	char			type;
@@ -152,7 +147,6 @@ char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_realloc_middle(t_alloc *alloc, size_t size);
 char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size);
-size_t	_count_zone_bytype(char type);
 
 /*
 ** show_mem_hex
@@ -163,11 +157,5 @@ void	_clear_buffer(char *s);
 void	_print_addr_type_color(t_zone *zone, char *addr,
 	t_alloc *next_alloc, t_color *color);
 void	_print_zone_information(t_zone *zone);
-
-/*
-** constructor && destructor 
-*/
-void	_constructor(void) __attribute__((constructor (101)));
-void	_destructor(void) __attribute__((destructor (101)));
 
 #endif
