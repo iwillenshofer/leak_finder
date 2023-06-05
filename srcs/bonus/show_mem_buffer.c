@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:06:03 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/26 17:47:34 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:19:18 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "malloc_bonus.h"
 
 void	_clear_buffer(char *s)
 {

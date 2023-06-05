@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/06/05 15:21:11 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/05 18:26:18 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,33 +22,40 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -fno-stack-protector -g
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden
 
 SRC_DIR = ./srcs
+COMMON_DIR = ${SRC_DIR}/common
+BONUS_DIR = ${SRC_DIR}/bonus
+
 OBJ_DIR = ./build
+
 INC_DIR = ./includes
-INCLUDES = ${INC_DIR}/malloc.h
 
-SRCS = ${SRC_DIR}/malloc.c \
-		${SRC_DIR}/zone_add.c \
-		${SRC_DIR}/zone_remove.c \
-		${SRC_DIR}/zone_sort.c \
-		${SRC_DIR}/alloc_add.c \
-		${SRC_DIR}/alloc_add_helpers.c \
-		${SRC_DIR}/alloc_remove.c \
-		${SRC_DIR}/alloc_realloc.c \
-		${SRC_DIR}/alloc_realloc_helpers.c \
-		${SRC_DIR}/show_mem.c \
-		${SRC_DIR}/show_mem_ex.c \
-		${SRC_DIR}/show_mem_colors.c \
-		${SRC_DIR}/show_mem_buffer.c \
-		${SRC_DIR}/show_mem_info.c \
-		${SRC_DIR}/alignment.c \
-		${SRC_DIR}/constructor.c \
-		${SRC_DIR}/thread_safe.c
+INCLUDES = ${INC_DIR}/malloc.h \
+			${INC_DIR}/malloc_internal.h \
+			${INC_DIR}/malloc_bonus.h
 
+COMMON_SRCS = ${COMMON_DIR}/zone_add.c \
+				${COMMON_DIR}/zone_remove.c \
+				${COMMON_DIR}/zone_utils.c \
+				${COMMON_DIR}/alloc_add.c \
+				${COMMON_DIR}/alloc_add_helpers.c \
+				${COMMON_DIR}/alloc_remove.c \
+				${COMMON_DIR}/alloc_realloc.c \
+				${COMMON_DIR}/show_mem.c \
+				${COMMON_DIR}/constructor.c
+
+BONUS_SRCS = ${BONUS_DIR}/show_mem_ex.c \
+				${BONUS_DIR}/show_mem_colors.c \
+				${BONUS_DIR}/show_mem_buffer.c \
+				${BONUS_DIR}/show_mem_info.c \
+				${BONUS_DIR}/thread_safe.c
+
+SRCS = ${COMMON_SRCS} ${BONUS_SRCS} ${SRC_DIR}/malloc.c
 
 OBJS = $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRCS})
+
 DEPENDS = $(patsubst %.o, %.d, ${OBJS})
 
 # **************************************************************************** #
@@ -89,6 +96,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} Makefile
 	@mkdir -p $(dir $@)
 	@${CC} ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -o $@ ${LDFLAGS}
 
+
 # **************************************************************************** #
 # *** Libft Rules                                                              #
 # **************************************************************************** #
@@ -128,20 +136,5 @@ fclean: clean
 	@make -C ${LIBFT_DIR} fclean
 
 re: fclean all
-
-
-SRCS_EMPTY_DIR = ./
-OBJS_EMPTY_DIR = ./build
-SRCS_EMPTY = ${SRCS_EMPTY_DIR}/empty.c
-OBJS_EMPTY = $(patsubst ${SRCS_EMPTY_DIR}/%.c, ${OBJS_EMPTY_DIR}/%.o, ${SRCS_EMPTY})
-
-empty: ${OBJS_EMPTY} Makefile
-	@gcc ${CCFLAGS} ${OBJS_EMPTY} -shared -o empty.so
-	@echo "\033[96mempty.so is built. \033[0m"
-
-${OBJS_EMPTY_DIR}/%.o: ${SRCS_EMPTY_DIR}/%.c  Makefile
-	@mkdir -p $(dir $@)
-	@${CC} ${CCFLAGS} -MMD -c $< -I. -I./srcs/libft -o $@ ${LDFLAGS}
-
 
 -include $(DEPENDS)

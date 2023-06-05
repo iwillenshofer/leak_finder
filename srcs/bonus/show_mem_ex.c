@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 12:23:28 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:19:24 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "malloc_bonus.h"
 
 /*
 ** prints the whole hex representation of a zone.

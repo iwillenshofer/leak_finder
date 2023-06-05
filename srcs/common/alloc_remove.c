@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 15:25:04 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:05:40 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 ** returns how many zones of a certain type there are.
 */
-
 size_t	_count_zone_bytype(char type)
 {
 	t_zone	*head;

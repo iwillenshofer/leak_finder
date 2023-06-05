@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:24:17 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/02 14:28:54 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:19:26 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "malloc_bonus.h"
 
 /*
 ** helper to the _print_zone_information() function.

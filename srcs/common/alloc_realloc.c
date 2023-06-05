@@ -6,27 +6,18 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:46:05 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 12:32:15 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:57:20 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_zone	*find_zone(void *ptr)
-{
-	t_zone	*head;
-
-	head = g_zones;
-	while (head)
-	{
-		if ((char *)head < (char *)ptr
-			&& (char *)ptr < (char *)head + head->size)
-			return (head);
-		head = head->next;
-	}
-	return (NULL);
-}
-
+/*
+** find an allocation by pointer inside a zone.
+** will only return if it is the pointer allocated to the user.
+** if the pointer lies within an allocation but is not alloc->ptr,
+** returns null.
+*/
 t_alloc	*find_alloc(void *ptr, t_zone *zone)
 {
 	t_alloc	*alloc;
@@ -47,7 +38,8 @@ t_alloc	*find_alloc(void *ptr, t_zone *zone)
 }
 
 /*
-** 
+** tries to create a new allocation and, if succeds, copies and frees
+** the previous pointer.
 */
 t_alloc	*reallocate(t_alloc *alloc, size_t size)
 {
@@ -69,12 +61,23 @@ t_alloc	*reallocate(t_alloc *alloc, size_t size)
 }
 
 /*
-** 
+** returns true if there is the space required by size between current and
+** next allocation.
 */
-t_alloc	*resize(t_alloc *alloc, size_t size)
+char	_is_space_realloc_middle(t_alloc *alloc, size_t size)
 {
-	alloc->size = size;
-	return (alloc);
+	return (alloc->next
+		&& (size_t)((char *)(alloc->next) - _endalloc(alloc)) >= size);
+}
+
+/*
+** returns true if there is no next allocation, and there is enough space
+** between current alloc and the required size.
+*/
+char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size)
+{
+	return (!(alloc->next)
+		&& zone->size - (_endalloc(alloc) - (char*)(zone)) >= size);
 }
 
 /*
@@ -97,16 +100,14 @@ t_alloc	*alloc_realloc(void *ptr, size_t size)
 	new_type = get_type(size);
 	zone = find_zone(ptr);
 	alloc = find_alloc(ptr, zone);
+	new_alloc = alloc;
 	if (!zone || !alloc)
 		return (NULL);
 	if (new_type != zone->type)
 		new_alloc = reallocate(alloc, size);
-	else if (size <= alloc->size)
-		new_alloc = resize(alloc, size);
-	else if (_is_space_realloc_middle(alloc, size))
-		new_alloc = resize(alloc, size);
-	else if (_is_space_realloc_end(alloc, zone, size))
-		new_alloc = resize(alloc, size);
+	else if ((size <= alloc->size) || (_is_space_realloc_middle(alloc, size))
+		|| (_is_space_realloc_end(alloc, zone, size)))
+		alloc->size = size;
 	else
 		new_alloc = reallocate(alloc, size);
 	return (new_alloc);

@@ -6,12 +6,15 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 14:23:21 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:07:24 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+/*
+** prints allocation info, as required by the subject
+*/
 void	_print_alloc(t_alloc *alloc)
 {
 	ft_puthex((size_t)(alloc->ptr));
@@ -23,7 +26,8 @@ void	_print_alloc(t_alloc *alloc)
 }
 
 /*
-** returns the sum of bytes for each allocation
+** prints zone info, as required by the subject
+** returns the sum of bytes for each allocation, so it can sum at the end
 */
 size_t	_print_zone(t_zone *zone)
 {
@@ -49,6 +53,9 @@ size_t	_print_zone(t_zone *zone)
 	return (count);
 }
 
+/*
+** loops through zone, printing each info
+*/
 void	_print_zones(void)
 {
 	t_zone	*head;

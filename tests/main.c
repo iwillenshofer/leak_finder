@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 19:08:10 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:01:44 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int main (void)
 	test_realloc();
 	return (0);
 }
+/*
 void* thread_function(void *arg)
 {
 	(void)arg;
@@ -78,12 +79,12 @@ int main4 (void)
 	alloc = malloc(1);
 	alloc = malloc(1);
 	alloc = malloc(85-32);
-	/*	
+	/	
 *alloc = '0';
 	alloc2 = malloc(18);
 	*alloc2 = '0';
 	alloc = realloc(alloc, 16 * 2);
-	alloc = malloc(16*2);*/
+	alloc = malloc(16*2);
 	show_alloc_mem_ex();
 	free(alloc);
 	return (0);
@@ -122,3 +123,4 @@ int main2(void)
 	}
 	return (0); 
 }
+*/

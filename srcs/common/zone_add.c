@@ -6,11 +6,27 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 15:24:40 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:39:33 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+
+/*
+** ensure size is multiple of 16 (ALIGNMENT).
+*/
+size_t	_aligned_size(size_t size)
+{
+	size_t	rest;
+
+	if (size < ALIGNMENT)
+		return (ALIGNMENT);
+	rest = size % ALIGNMENT;
+	if (!rest)
+		return (size);
+	return (size + (ALIGNMENT - rest));
+}
+
 /*
 ** get_paginated_size makes sure the size requested to mmap is:
 ** 1. multiple of getpagesize() - this applies to all cases
@@ -18,7 +34,6 @@
 ** 3. includes the header needed for such allocations, wich means:
 ** - one t_zone size, and one or 100 t_alloc sizes (as in rule 2)
 */
-
 size_t	get_paginated_size(size_t size)
 {
 	size_t	amount;

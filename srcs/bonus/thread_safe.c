@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:51:51 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 11:47:48 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:19:31 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "malloc_bonus.h"
 
 void	lock_mutex(void)
 {

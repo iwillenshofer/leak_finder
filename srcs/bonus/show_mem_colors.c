@@ -6,11 +6,11 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:04:13 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 12:32:51 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:19:21 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "malloc_bonus.h"
 
 /*
 ** prints a new color only if it is different of the previous color

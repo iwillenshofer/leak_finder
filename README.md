@@ -41,8 +41,12 @@ int main (void)
 
 --> Determine the correct minimum size (LIMIT) [DONE]
 
---> test realloc extensivelly!!!
+--> test realloc extensivelly!!! [DONE]
 
+--> TODO:
+1. Testing with online testers
+2. Fix color reset
+3. Fix function names (_ for internal functions)
 
 > Nice mmap resouce
 > https://www.cs.uaf.edu/2017/fall/cs301/lecture/11_20_mmap.html

@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zone_sort.c                                        :+:      :+:    :+:   */
+/*   zone_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 13:01:20 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:49:48 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 /*
-** Sorting zones may be needed to make sure they are ordered
-** according to their address.
+** loops through zones until finding one where ptr belongs to.
+** (it does not mean that ptr is a valid ptr belonging to the user, as it may
+** lie in zone/alloc headers or a zone free space, or even 'in between'
+** valid allocations. ie: ptr = malloc(10); ptr + 15;)
 */
+t_zone	*find_zone(void *ptr)
+{
+	t_zone	*head;
+
+	head = g_zones;
+	while (head)
+	{
+		if ((char *)head < (char *)ptr
+			&& (char *)ptr < (char *)head + head->size)
+			return (head);
+		head = head->next;
+	}
+	return (NULL);
+}
 
 /*
 ** swaps self with self->next. 
@@ -41,6 +57,10 @@ void	swap(t_zone *self)
 		g_zones = next;
 }
 
+/*
+** Sorting zones may be needed to make sure they are ordered
+** according to their address (as required by the subject when printing). 
+*/
 void	zone_sort(void)
 {
 	t_zone	*head;
