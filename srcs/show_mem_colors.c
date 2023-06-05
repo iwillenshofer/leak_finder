@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:04:13 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 17:02:30 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:32:51 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	_print_addr_type_color(t_zone *zone, char *addr,
 {
 	if (addr == (char *)zone)
 		_put_color(WHITE, BOLD, color);
-	else if (addr > (char *)zone && addr < (char*)zone + _aligned_size(sizeof(t_zone)))
+	else if (addr > (char *)zone && addr
+		< (char *)zone + _aligned_size(sizeof(t_zone)))
 		_put_color(WHITE, REGULAR, color);
 	else if (next_alloc && addr == (char *)next_alloc)
 		_put_color(CYAN, BOLD, color);

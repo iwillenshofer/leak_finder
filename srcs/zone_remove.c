@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 18:18:19 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:33:26 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	deallocate(t_zone *zone)
 {
-	int res;
-
-	res = munmap(zone, zone->size);
-	if (!res)
-		deallocated++;
+	munmap(zone, zone->size);
 }
 
 void	zone_remove(t_zone *zone)

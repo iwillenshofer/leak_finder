@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 12:30:02 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:34:44 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ typedef struct s_zone
 */
 t_zone			*g_zones;
 pthread_mutex_t	g_mutex;
-
-size_t allocated; /* TESTING!!! */
-size_t deallocated; /* TESTING!!! */
 
 void	free(void *ptr)
 		__attribute__ ((visibility ("default")));
