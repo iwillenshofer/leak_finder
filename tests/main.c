@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 14:28:33 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:49:38 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int main (void)
 {
+	show_alloc_mem_ex();
 	test_malloc();
 	test_realloc();
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:46:05 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:47:24 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:00:14 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_alloc	*__reallocate(t_alloc *alloc, size_t size)
 
 	new_alloc = _alloc_add(size);
 	limit = size;
-	if (size < alloc->size)
+	if (size > alloc->size)
 		limit = alloc->size;
 	if (new_alloc && new_alloc->ptr)
 	{
