@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:52:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 18:09:16 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:41:42 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free(void *ptr)
 	if (ptr)
 	{
 		lock_mutex();
-		alloc_remove(ptr);
+		_alloc_remove(ptr);
 		unlock_mutex();
 	}
 	return ;
@@ -37,7 +37,7 @@ void	*malloc(size_t size)
 	if (!(size))
 		return (NULL);
 	lock_mutex();
-	new_alloc = alloc_add(size);
+	new_alloc = _alloc_add(size);
 	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);
@@ -56,7 +56,7 @@ void	*realloc(void *ptr, size_t size)
 		return (NULL);
 	}
 	lock_mutex();
-	new_alloc = alloc_realloc(ptr, size);
+	new_alloc = _alloc_realloc(ptr, size);
 	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);

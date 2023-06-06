@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 18:05:40 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:38:02 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	_count_zone_bytype(char type)
 /*
 ** dettaches allocation from list, and deallocates zone, if it is now empty.
 */
-void	free_alloc(t_alloc *alloc, t_zone *zone)
+void	__free_alloc(t_alloc *alloc, t_zone *zone)
 {
 	if (alloc->prev)
 		alloc->prev->next = alloc->next;
@@ -44,13 +44,13 @@ void	free_alloc(t_alloc *alloc, t_zone *zone)
 		zone->allocs = alloc->next;
 	if (!(alloc->next) && !(alloc->prev)
 		&& (zone-> type == LARGE || _count_zone_bytype(zone->type) > 1))
-		zone_remove(zone);
+		_zone_remove(zone);
 }
 
 /*
 ** loop through the zones to find the allocation.
 */
-void	alloc_remove(void *ptr)
+void	_alloc_remove(void *ptr)
 {
 	t_zone	*zone;
 	t_alloc	*alloc;
@@ -66,7 +66,7 @@ void	alloc_remove(void *ptr)
 			{
 				if (alloc->ptr == ptr)
 				{
-					free_alloc(alloc, zone);
+					__free_alloc(alloc, zone);
 					return ;
 				}
 				else if ((char *)ptr > (char *)alloc

@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 17:39:33 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:55:29 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	_aligned_size(size_t size)
 ** 3. includes the header needed for such allocations, wich means:
 ** - one t_zone size, and one or 100 t_alloc sizes (as in rule 2)
 */
-size_t	get_paginated_size(size_t size)
+size_t	__get_paginated_size(size_t size)
 {
 	size_t	amount;
 	size_t	total_size;
@@ -61,7 +61,7 @@ size_t	get_paginated_size(size_t size)
 ** Allocation only happens on zone level.
 */
 
-void	*allocate(size_t size)
+void	*__allocate(size_t size)
 {
 	void	*ptr;
 
@@ -76,7 +76,7 @@ void	*allocate(size_t size)
 ** places the newly created zone in the head (g_zone)
 ** if the list is still empty, or at the end of it (last element).
 */
-void	zone_place_new(t_zone *ptr)
+void	__zone_place_new(t_zone *ptr)
 {
 	t_zone	*head;
 
@@ -99,7 +99,7 @@ void	zone_place_new(t_zone *ptr)
 ** 2. set up zone structure
 ** 3. add to the end of g_zones.
 */
-t_zone	*zone_add(char type, size_t size)
+t_zone	*_zone_add(char type, size_t size)
 {
 	t_zone	*ptr;
 	size_t	total_size;
@@ -108,14 +108,14 @@ t_zone	*zone_add(char type, size_t size)
 		size = MEDIUM_LIMIT;
 	else if (type == TINY)
 		size = TINY_LIMIT;
-	total_size = get_paginated_size(size);
-	ptr = allocate(total_size);
+	total_size = __get_paginated_size(size);
+	ptr = __allocate(total_size);
 	if (!(ptr))
 		return (NULL);
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
 	ptr->size = total_size;
 	ptr->type = type;
-	zone_place_new(ptr);
-	zone_sort();
+	__zone_place_new(ptr);
+	_zone_sort();
 	return (ptr);
 }

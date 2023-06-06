@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 18:53:26 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 19:08:17 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:54:16 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	test_malloc(void)
 	ft_putstr("MALLOCED ");
 	ft_puthex((size_t)s);
 	ft_putstr("\n");
-	show_alloc_mem_ex();
+	
 	free(s);
 }

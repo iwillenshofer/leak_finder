@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 17:49:48 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:34:00 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** lie in zone/alloc headers or a zone free space, or even 'in between'
 ** valid allocations. ie: ptr = malloc(10); ptr + 15;)
 */
-t_zone	*find_zone(void *ptr)
+t_zone	*_find_zone(void *ptr)
 {
 	t_zone	*head;
 
@@ -36,7 +36,7 @@ t_zone	*find_zone(void *ptr)
 /*
 ** swaps self with self->next. 
 */
-void	swap(t_zone *self)
+void	__swap(t_zone *self)
 {
 	t_zone	*nextnext_tmp;
 	t_zone	*next;
@@ -61,7 +61,7 @@ void	swap(t_zone *self)
 ** Sorting zones may be needed to make sure they are ordered
 ** according to their address (as required by the subject when printing). 
 */
-void	zone_sort(void)
+void	_zone_sort(void)
 {
 	t_zone	*head;
 
@@ -70,7 +70,7 @@ void	zone_sort(void)
 	{
 		if (head > head->next)
 		{
-			swap(head);
+			__swap(head);
 			head = g_zones;
 		}
 		else

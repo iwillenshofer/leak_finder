@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 18:07:24 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:53:43 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** prints allocation info, as required by the subject
 */
-void	_print_alloc(t_alloc *alloc)
+void	__print_alloc(t_alloc *alloc)
 {
 	ft_puthex((size_t)(alloc->ptr));
 	ft_putstr(" - ");
@@ -29,7 +29,7 @@ void	_print_alloc(t_alloc *alloc)
 ** prints zone info, as required by the subject
 ** returns the sum of bytes for each allocation, so it can sum at the end
 */
-size_t	_print_zone(t_zone *zone)
+size_t	__print_zone(t_zone *zone)
 {
 	t_alloc	*alloc;
 	size_t	count;
@@ -46,7 +46,7 @@ size_t	_print_zone(t_zone *zone)
 	alloc = zone->allocs;
 	while (alloc)
 	{
-		_print_alloc(alloc);
+		__print_alloc(alloc);
 		count += alloc->size;
 		alloc = alloc->next;
 	}
@@ -65,7 +65,7 @@ void	_print_zones(void)
 	head = g_zones;
 	while (head)
 	{
-		count += _print_zone(head);
+		count += __print_zone(head);
 		head = head->next;
 	}
 	ft_putstr("Total : ");

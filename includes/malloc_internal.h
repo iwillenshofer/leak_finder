@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:45:36 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 18:12:26 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:45:42 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,32 +79,33 @@ typedef struct s_zone
 }	t_zone;
 
 /*
-** global variables for zones (allocations) and thread safe.
+** global variable for zones (allocations).
 */
 t_zone			*g_zones;
 
-t_zone	*zone_add(char type, size_t size);
-void	zone_remove(t_zone *zone);
-void	zone_sort(void);
-t_alloc	*alloc_add(size_t size);
-void	alloc_remove(void *ptr);
-t_alloc	*alloc_realloc(void *ptr, size_t size);
+/*
+** main internal functions
+*/
+t_alloc	*_alloc_add(size_t size);
+void	_alloc_remove(void *ptr);
+t_alloc	*_alloc_realloc(void *ptr, size_t size);
+t_zone	*_zone_add(char type, size_t size);
+void	_zone_remove(t_zone *zone);
 void	_print_zones(void);
 
 /*
 ** helpers
 */
-char	get_type(size_t size);
+char	_get_type(size_t size);
 size_t	_aligned_size(size_t size);
 char	*_endzone(t_zone *zone);
 char	*_endalloc(t_alloc *alloc);
 char	_is_space_middle_alloc(t_alloc *head, size_t size);
 char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
 char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
-char	_is_space_realloc_middle(t_alloc *alloc, size_t size);
-char	_is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size);
 size_t	_count_zone_bytype(char type);
-t_zone	*find_zone(void *ptr);
+t_zone	*_find_zone(void *ptr);
+void	_zone_sort(void);
 
 /*
 ** constructor && destructor 

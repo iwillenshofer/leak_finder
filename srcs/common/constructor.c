@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 21:55:04 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 15:21:29 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:33:47 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 void	_constructor(void)
 {
 	if (!(_count_zone_bytype(TINY)))
-		zone_add(TINY, 0);
+		_zone_add(TINY, 0);
 	if (!(_count_zone_bytype(MEDIUM)))
-		zone_add(MEDIUM, 0);
+		_zone_add(MEDIUM, 0);
 }
 
 /*
@@ -37,7 +37,7 @@ void	_destructor(void)
 	{
 		next = head->next;
 		if (head->type != LARGE && head->allocs == NULL)
-			zone_remove(head);
+			_zone_remove(head);
 		head = next;
 	}
 }
