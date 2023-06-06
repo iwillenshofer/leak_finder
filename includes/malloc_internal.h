@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:45:36 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 14:10:00 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:42:37 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 ** Node size limit
 ** Maximum size of element that will fit in a zone.
 */
-# define TINY_LIMIT 256
-# define MEDIUM_LIMIT 1024
+# define TINY_LIMIT 512
+# define MEDIUM_LIMIT 10240
 
 /*
 ** Pointers must be a multiple of alignment

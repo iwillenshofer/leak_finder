@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 17:19:24 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:20:25 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	_print_zones_resume(void)
 	head = g_zones;
 	_put_color(BLUE, BOLD, NULL);
 	ft_putstr("Overall Zones Information:\n");
+	_put_color(RESET, REGULAR, NULL);
 	while (head)
 	{
 		if (head->type == TINY)
@@ -95,6 +96,7 @@ void	_print_zones_ex(void)
 	_print_zones_resume();
 	_put_color(BLUE, BOLD, NULL);
 	ft_putstr("Individual Zone Information:\n");
+	_put_color(RESET, REGULAR, NULL);
 	while (head)
 	{
 		_print_zone_ex(head);

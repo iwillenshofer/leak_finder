@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:04:13 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 17:19:21 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:26:45 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	_put_color(char new_color, char new_opt, t_color *current)
 {
 	if (current && current->color == new_color && current->options == new_opt)
 		return ;
+	if (new_color == RESET)
+	{
+		ft_putstr("\033[0m");
+		return ;
+	}
 	ft_putstr("\033[0;");
 	if (new_color)
 	{

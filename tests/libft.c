@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 18:15:00 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 21:19:22 by iwillens         ###   ########.fr       */
+/*   Created: 2023/06/06 20:56:56 by iwillens          #+#    #+#             */
+/*   Updated: 2023/06/06 20:58:52 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-void	*thread_function(void *arg)
+size_t	ft_strlen(const char *s)
 {
-	test_malloc();
-	test_realloc();
-	show_alloc_mem();
-	return (NULL);
+	size_t	size;
+
+	size = 0;
+	while (s[size] != '\0')
+		size++;
+	return (size);
 }
 
-int	main(void)
+void	ft_putchar(char c)
 {
-	int			i;
-	pthread_t	tid[THREADS];
+	write(1, &c, 1);
+}
 
-	i = 0;
-	while (i < THREADS)
+void	ft_putstr(const char *s)
+{
+	write(1, s, ft_strlen(s));
+}
+
+void	ft_putnbr(int nb)
+{
+	unsigned int	number;
+
+	if (nb < 0)
 	{
-		pthread_create(&(tid[i]), NULL, &thread_function, NULL);
-		i++;
+		ft_putchar('-');
+		number = nb * -1;
 	}
-	i = 0;
-	while (i < THREADS)
-	{
-		pthread_join(tid[i], NULL);
-		i++;
-	}
-	return (0);
+	else
+		number = nb;
+	if ((number / 10) > 0)
+		ft_putnbr(number / 10);
+	ft_putchar((number % 10) + '0');
 }

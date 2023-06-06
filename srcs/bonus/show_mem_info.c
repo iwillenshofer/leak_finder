@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:24:17 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 17:19:26 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:20:48 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	_print_zone_information(t_zone *zone)
 		ft_putstr("undetermined");
 	ft_putstr(" bytes max alloc. ");
 	ft_putchar('\n');
+	_put_color(RESET, REGULAR, NULL);
 }
