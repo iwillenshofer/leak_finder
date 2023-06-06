@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:50:50 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:46:19 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_alloc	*__find_spot(t_zone *zone, size_t s)
 
 	alloc = NULL;
 	h = zone->allocs;
+	if (zone->free < (s + _aligned_size(sizeof(t_alloc))))
+		return (NULL);
 	if (!(h))
 		alloc = __newalloc((t_alloc *)(_endzone(zone)), NULL, NULL, s);
 	else if (_is_space_begin_zone(h, zone, s))
@@ -67,6 +69,8 @@ t_alloc	*__find_spot(t_zone *zone, size_t s)
 			alloc = __newalloc((t_alloc *)(_endalloc(h) + h->size), h, NULL, s);
 		h = h->next;
 	}
+	if (alloc)
+		zone->free -= (s + _aligned_size(sizeof(t_alloc)));
 	return (alloc);
 }
 
@@ -99,13 +103,11 @@ t_alloc	*_alloc_add(size_t size)
 		zone = zone->next;
 	}
 	if (!(allocated))
-	{
 		zone = _zone_add(type, size);
-		if (zone)
-		{
-			allocated = __find_spot(zone, size);
-			zone->allocs = allocated;
-		}
+	if (!(allocated) && zone)
+	{
+		allocated = __find_spot(zone, size);
+		zone->allocs = allocated;
 	}
 	return (allocated);
 }

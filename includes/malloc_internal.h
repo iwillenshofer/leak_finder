@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:45:36 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:45:42 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:10:00 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_alloc
 **  a.k.a (*t_zone + sizeof(t_zone))
 ** size: the whole size of allocation for this Zone.
 **  this includes the size of t_zone itself.
+** free: included to increase algorithm speed, keeping track
+**  of free bytes avoiding going through all allocations.
 ** type: TINY/MEDIUM/LARGE
 ** count: quantity of allocated zones.
 ** next/prev: pointers to other next/prev nodes
@@ -73,6 +75,7 @@ typedef struct s_zone
 {
 	t_alloc			*allocs;
 	size_t			size;
+	size_t			free;
 	char			type;
 	struct s_zone	*prev;
 	struct s_zone	*next;

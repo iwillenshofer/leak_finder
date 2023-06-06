@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:55:29 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:39:15 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_zone	*_zone_add(char type, size_t size)
 	if (!(ptr))
 		return (NULL);
 	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
+	ptr->free = total_size - _aligned_size(sizeof(t_zone));
 	ptr->size = total_size;
 	ptr->type = type;
 	__zone_place_new(ptr);
