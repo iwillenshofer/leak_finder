@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:52:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:41:42 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:09:31 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	free(void *ptr)
 	return ;
 }
 
-/*
-** Implementation defined:
-** malloc(0) will return NULL.
-*/
 void	*malloc(size_t size)
 {
 	t_alloc	*new_alloc;

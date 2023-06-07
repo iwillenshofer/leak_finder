@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:00:15 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_alloc	*__find_spot(t_zone *zone, size_t s)
 		alloc = __newalloc((t_alloc *)(_endzone(zone)), NULL, NULL, s);
 	else if (_is_space_begin_zone(h, zone, s))
 		alloc = __newalloc((t_alloc *)(_endzone(zone)), NULL, zone->allocs, s);
-	if (alloc && !(zone->allocs))
+	if (alloc && (!(zone->allocs) || (zone->allocs == alloc->next)))
 		zone->allocs = alloc;
 	while (!(alloc) && h)
 	{
