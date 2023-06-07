@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:54:27 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 21:17:30 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:36 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #  define TINY_LIMIT 10
 # endif
 
-# ifndef MEDIUM_LIMIT
-#  define MEDIUM_LIMIT 20
+# ifndef SMALL_LIMIT
+#  define SMALL_LIMIT 20
 # endif
 
 # define MALLOC_TEST_SIZE 10000

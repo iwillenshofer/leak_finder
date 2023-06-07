@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:34:27 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/03 18:47:29 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:36 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	test_realloc_up(void)
 	i = 0;
 	addr = NULL;
 	addr2 = NULL;
-	limit = (MEDIUM_LIMIT + (4096 * 2));
+	limit = (SMALL_LIMIT + (4096 * 2));
 	ft_putstr("*** TESTING REALLOC UP \n");
 	while (i < limit)
 	{
@@ -57,7 +57,7 @@ void	test_realloc_down(void)
 
 	addr = NULL;
 	addr2 = NULL;
-	limit = (MEDIUM_LIMIT + (4096 * 2));
+	limit = (SMALL_LIMIT + (4096 * 2));
 	ft_putstr("*** TESTING REALLOC DOWN \n");
 	while (limit)
 	{

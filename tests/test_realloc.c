@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:08:09 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 21:21:48 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:36 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	test_realloc_to_tiny(void)
 {
 	char	*s[3];
 
-	s[0] = malloc(MEDIUM_LIMIT + 1);
+	s[0] = malloc(SMALL_LIMIT + 1);
 	s[0][0] = 'a';
 	s[1] = realloc(s[0], 1);
 	if (s[0] != s[1] && s[1][0] == 'a')
@@ -75,9 +75,9 @@ void	test_realloc(void)
 {
 	test_realloc_bounderies();
 	test_realloc_limit(1, TINY_LIMIT);
-	test_realloc_limit(TINY_LIMIT + 1, MEDIUM_LIMIT);
+	test_realloc_limit(TINY_LIMIT + 1, SMALL_LIMIT);
 	test_realloc_limit(1, TINY_LIMIT + 1);
-	test_realloc_limit(TINY_LIMIT + 1, MEDIUM_LIMIT + 1);
+	test_realloc_limit(TINY_LIMIT + 1, SMALL_LIMIT + 1);
 	test_realloc_middle();
 	test_realloc_to_tiny();
 }

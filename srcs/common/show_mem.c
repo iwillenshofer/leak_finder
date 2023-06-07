@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:53:43 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	__print_zone(t_zone *zone)
 	count = 0;
 	if (zone->type == TINY)
 		ft_putstr("TINY : ");
-	else if (zone->type == MEDIUM)
+	else if (zone->type == SMALL)
 		ft_putstr("SMALL : ");
 	else
 		ft_putstr("LARGE : ");

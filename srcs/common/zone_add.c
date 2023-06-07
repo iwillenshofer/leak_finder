@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 14:39:15 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:48:44 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	_aligned_size(size_t size)
 /*
 ** get_paginated_size makes sure the size requested to mmap is:
 ** 1. multiple of getpagesize() - this applies to all cases
-** 2. fits at least 100 allocation if size is of medium or tiny type.
+** 2. fits at least 100 allocation if size is of small or tiny type.
 ** 3. includes the header needed for such allocations, wich means:
 ** - one t_zone size, and one or 100 t_alloc sizes (as in rule 2)
 */
@@ -42,14 +42,14 @@ size_t	__get_paginated_size(size_t size)
 
 	pagesize = getpagesize();
 	amount = 1;
-	if (size <= MEDIUM_LIMIT)
+	if (size <= SMALL_LIMIT)
 		amount = 100;
 	total_size = _aligned_size(sizeof(t_zone)) + amount
 		* (_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
-	if (size > MEDIUM_LIMIT)
+	if (size > SMALL_LIMIT)
 		total_size += size;
 	else if (size > TINY_LIMIT)
-		total_size += (amount * MEDIUM_LIMIT);
+		total_size += (amount * SMALL_LIMIT);
 	else
 		total_size += (amount * TINY_LIMIT);
 	if (pagesize > total_size)
@@ -104,8 +104,8 @@ t_zone	*_zone_add(char type, size_t size)
 	t_zone	*ptr;
 	size_t	total_size;
 
-	if (type == MEDIUM)
-		size = MEDIUM_LIMIT;
+	if (type == SMALL)
+		size = SMALL_LIMIT;
 	else if (type == TINY)
 		size = TINY_LIMIT;
 	total_size = __get_paginated_size(size);

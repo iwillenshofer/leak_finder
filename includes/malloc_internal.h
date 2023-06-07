@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:45:36 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 19:42:37 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** Zone type enum
 */
 # define TINY 0
-# define MEDIUM 1
+# define SMALL 1
 # define LARGE 2
 
 /*
@@ -28,7 +28,7 @@
 ** Maximum size of element that will fit in a zone.
 */
 # define TINY_LIMIT 512
-# define MEDIUM_LIMIT 10240
+# define SMALL_LIMIT 10240
 
 /*
 ** Pointers must be a multiple of alignment
@@ -66,7 +66,7 @@ typedef struct s_alloc
 **  this includes the size of t_zone itself.
 ** free: included to increase algorithm speed, keeping track
 **  of free bytes avoiding going through all allocations.
-** type: TINY/MEDIUM/LARGE
+** type: TINY/SMALL/LARGE
 ** count: quantity of allocated zones.
 ** next/prev: pointers to other next/prev nodes
 */

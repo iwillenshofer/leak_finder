@@ -6,7 +6,7 @@
 #    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 20:47:21 by iwillens          #+#    #+#              #
-#    Updated: 2023/06/06 21:20:09 by iwillens         ###   ########.fr        #
+#    Updated: 2023/06/07 10:44:18 by iwillens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ TESTS = ${TESTS_SRC_DIR}/libft.c \
 		${TESTS_SRC_DIR}/test_malloc.c
 
 TESTS_OBJS = $(patsubst ${TESTS_SRC_DIR}/%.c, ${TESTS_OBJ_DIR}/%.o, ${TESTS})
-
+REAL_PATH=$(realpath ${MALLOC_DIR})
 INCLUDES = tests.h
 
 # **************************************************************************** #
@@ -40,7 +40,7 @@ INCLUDES = tests.h
 all: ${TEST}
 
 ${TEST}: ${MALLOC_DIR}/libft_malloc.so ${TESTS_OBJS} ${INCLUDES} Makefile
-	@${CC} ${CCFLAGS}  ${TESTS_OBJS} -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -L${MALLOC_DIR} -lft_malloc -o ${TEST}
+	@${CC} ${CCFLAGS}  ${TESTS_OBJS} -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR} -L${MALLOC_DIR} -lft_malloc -Wl,-rpath,${MALLOC_DIR} -o ${TEST}
 	@echo "\033[92m${TEST} is built. \033[0m"
 
 ${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} Makefile
@@ -48,9 +48,7 @@ ${TESTS_OBJ_DIR}/%.o: ${TESTS_SRC_DIR}/%.c ${INC_DIR} ${INCLUDES} Makefile
 	@${CC}  ${CCFLAGS} -MMD -c $< -I. -I ${INC_DIR} -I ${TESTS_SRC_DIR}  -o $@
 
 ${MALLOC_DIR}/libft_malloc.so:
-	make -C ${MALLOC_DIR}
-	cp  ${MALLOC_DIR}libft_malloc.so .
-	cp ${MALLOC_DIR}libft_malloc_x86_64_Darwin.so .
+	@make -C ${MALLOC_DIR}
 
 test: ${NAME} ${TEST}
 	./${TEST}

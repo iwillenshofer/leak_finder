@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 21:55:04 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:33:47 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:48:38 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 /*
 ** constructs preallocated memory regions for
-** small and medium zones
+** tiny and small zones
 */
 void	_constructor(void)
 {
 	if (!(_count_zone_bytype(TINY)))
 		_zone_add(TINY, 0);
-	if (!(_count_zone_bytype(MEDIUM)))
-		_zone_add(MEDIUM, 0);
+	if (!(_count_zone_bytype(SMALL)))
+		_zone_add(SMALL, 0);
 }
 
 /*
-** destroys any empty medium and small regions.
+** destroys any empty tiny and small regions.
 */
 void	_destructor(void)
 {

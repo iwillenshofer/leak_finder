@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:24:17 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 18:20:48 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	_print_zone_information(t_zone *zone)
 	_put_color(PURPLE, REGULAR, NULL);
 	if (zone->type == TINY)
 		ft_putnbr(TINY_LIMIT);
-	else if (zone->type == MEDIUM)
-		ft_putnbr(MEDIUM_LIMIT);
+	else if (zone->type == SMALL)
+		ft_putnbr(SMALL_LIMIT);
 	else
 		ft_putstr("undetermined");
 	ft_putstr(" bytes max alloc. ");

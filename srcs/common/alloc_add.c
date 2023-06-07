@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 17:37:20 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	_get_type(size_t size)
 {
-	if (size > MEDIUM_LIMIT)
+	if (size > SMALL_LIMIT)
 		return (LARGE);
 	if (size > TINY_LIMIT)
-		return (MEDIUM);
+		return (SMALL);
 	return (TINY);
 }
 

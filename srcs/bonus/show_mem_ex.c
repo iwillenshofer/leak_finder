@@ -6,7 +6,7 @@
 /*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 18:20:25 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	_print_zone_ex(t_zone *zone)
 {
 	if (zone->type == TINY)
 		ft_putstr("TINY: ");
-	else if (zone->type == MEDIUM)
+	else if (zone->type == SMALL)
 		ft_putstr("SMALL: ");
 	else
 		ft_putstr("LARGE: ");
@@ -72,7 +72,7 @@ void	_print_zones_resume(void)
 	{
 		if (head->type == TINY)
 			ft_putstr("TINY: ");
-		else if (head->type == MEDIUM)
+		else if (head->type == SMALL)
 			ft_putstr("SMALL: ");
 		else
 			ft_putstr("LARGE: ");
