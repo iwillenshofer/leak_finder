@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ftm_puthex_byte.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/01 11:09:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 18:38:14 by iwillens         ###   ########.fr       */
+/*   Created: 2023/05/21 18:30:03 by iwillens          #+#    #+#             */
+/*   Updated: 2023/07/21 17:45:08 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-void	ft_puthex_loop(size_t nb)
+void	_print_hex_byte(unsigned char c)
 {
-	char	c;
-
-	if ((nb / 16))
-		ft_puthex_loop(nb / 16);
-	c = (nb % 16);
 	if (c < 10)
 		c += '0';
 	else
-		c = (c - 10) + 'a';
-	ft_putchar(c);
+		c += 'a' - 10;
+	ftm_putchar(c);
 }
 
-void	ft_puthex(size_t nb)
+void	ftm_puthexbyte(unsigned char c)
 {
-	ft_putstr("0x");
-	ft_puthex_loop(nb);
+	unsigned char	n1;
+	unsigned char	n2;
+
+	n1 = c / 16;
+	n2 = c % 16;
+	ftm_putchar(' ');
+	_print_hex_byte(n1);
+	_print_hex_byte(n2);
 }

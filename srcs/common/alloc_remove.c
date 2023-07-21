@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:01 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 17:32:54 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:14:45 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** returns how many zones of a certain type there are.
 */
-size_t	_count_zone_bytype(char type)
+size_t	count_zone_bytype(char type)
 {
 	t_zone	*head;
 	size_t	count;
@@ -42,16 +42,16 @@ void	__free_alloc(t_alloc *alloc, t_zone *zone)
 		alloc->next->prev = alloc->prev;
 	if (zone->allocs == alloc)
 		zone->allocs = alloc->next;
-	zone->free += (alloc->size + _aligned_size(sizeof(t_alloc)));
+	zone->free += (alloc->size + m_aligned_size(sizeof(t_alloc)));
 	if (!(alloc->next) && !(alloc->prev)
-		&& (zone-> type == LARGE || _count_zone_bytype(zone->type) > 1))
-		_zone_remove(zone);
+		&& (zone-> type == LARGE || count_zone_bytype(zone->type) > 1))
+		m_zone_remove(zone);
 }
 
 /*
 ** loop through the zones to find the allocation.
 */
-void	_alloc_remove(void *ptr)
+void	m_alloc_remove(void *ptr)
 {
 	t_zone	*zone;
 	t_alloc	*alloc;

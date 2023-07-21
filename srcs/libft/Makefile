@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/01 10:55:01 by iwillens          #+#    #+#              #
-#    Updated: 2023/05/26 12:11:30 by iwillens         ###   ########.fr        #
+#    Updated: 2023/07/21 18:56:03 by igorwillens      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,17 @@
 
 NAME = libft.a
 
-SRCS =  ft_putchar.c \
-		ft_puthex.c \
-		ft_putnbr.c \
-		ft_putstr.c \
-		ft_strlen.c \
-		ft_bzero.c \
-		ft_memcpy.c \
-		ft_puthex_byte.c \
-		ft_isprint.c \
-		ft_strcpy.c \
-		ft_memset.c
+SRCS =  ftm_putchar.c \
+		ftm_puthex.c \
+		ftm_putnbr.c \
+		ftm_putstr.c \
+		ftm_strlen.c \
+		ftm_bzero.c \
+		ftm_memcpy.c \
+		ftm_puthex_byte.c \
+		ftm_isprint.c \
+		ftm_strcpy.c \
+		ftm_memset.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

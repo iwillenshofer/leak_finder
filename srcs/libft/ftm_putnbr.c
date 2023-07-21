@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ftm_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 08:53:43 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/25 18:26:26 by iwillens         ###   ########.fr       */
+/*   Created: 2023/01/01 11:08:35 by iwillens          #+#    #+#             */
+/*   Updated: 2023/07/21 17:45:08 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-char	*ft_strcpy(char *dst, char *src)
+void	ftm_putnbr(int nb)
 {
-	while (*src)
+	unsigned int	number;
+
+	if (nb < 0)
 	{
-		*dst = *src;
-		src++;
-		dst++;
+		ftm_putchar('-');
+		number = nb * -1;
 	}
-	*dst = *src;
-	return (dst);
+	else
+		number = nb;
+	if ((number / 10) > 0)
+		ftm_putnbr(number / 10);
+	ftm_putchar((number % 10) + '0');
 }

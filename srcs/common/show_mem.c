@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_mem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:16:53 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 */
 void	__print_alloc(t_alloc *alloc)
 {
-	ft_puthex((size_t)(alloc->ptr));
-	ft_putstr(" - ");
-	ft_puthex((size_t)(alloc->ptr) + alloc->size - 1);
-	ft_putstr(" : ");
-	ft_putnbr(alloc->size);
-	ft_putstr(" bytes\n");
+	ftm_puthex((size_t)(alloc->ptr));
+	ftm_putstr(" - ");
+	ftm_puthex((size_t)(alloc->ptr) + alloc->size - 1);
+	ftm_putstr(" : ");
+	ftm_putnbr(alloc->size);
+	ftm_putstr(" bytes\n");
 }
 
 /*
@@ -36,13 +36,13 @@ size_t	__print_zone(t_zone *zone)
 
 	count = 0;
 	if (zone->type == TINY)
-		ft_putstr("TINY : ");
+		ftm_putstr("TINY : ");
 	else if (zone->type == SMALL)
-		ft_putstr("SMALL : ");
+		ftm_putstr("SMALL : ");
 	else
-		ft_putstr("LARGE : ");
-	ft_puthex((size_t)zone);
-	ft_putchar('\n');
+		ftm_putstr("LARGE : ");
+	ftm_puthex((size_t)zone);
+	ftm_putchar('\n');
 	alloc = zone->allocs;
 	while (alloc)
 	{
@@ -56,7 +56,7 @@ size_t	__print_zone(t_zone *zone)
 /*
 ** loops through zone, printing each info
 */
-void	_print_zones(void)
+void	m_print_zones(void)
 {
 	t_zone	*head;
 	size_t	count;
@@ -68,7 +68,7 @@ void	_print_zones(void)
 		count += __print_zone(head);
 		head = head->next;
 	}
-	ft_putstr("Total : ");
-	ft_putnbr(count);
-	ft_putstr(" bytes\n");
+	ftm_putstr("Total : ");
+	ftm_putnbr(count);
+	ftm_putstr(" bytes\n");
 }

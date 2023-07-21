@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ftm_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 16:02:44 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/10 12:01:06 by iwillens         ###   ########.fr       */
+/*   Created: 2023/05/25 10:19:14 by iwillens          #+#    #+#             */
+/*   Updated: 2023/05/25 18:26:33 by iwillens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ftm_memset(void *b, int c, size_t len)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*str;
 
 	i = 0;
-	if (!(s) || !(n))
-		return ;
-	while (i < n)
+	str = b;
+	while (i < len)
 	{
-		((char *)s)[i] = 0;
+		str[i] = (unsigned char)c;
 		i++;
 	}
+	return (b);
 }

@@ -6,7 +6,7 @@
 #    By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/07/21 16:38:14 by igorwillens      ###   ########.fr        #
+#    Updated: 2023/07/21 19:23:13 by igorwillens      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1 
 
 SRC_DIR = ./srcs
 COMMON_DIR = ${SRC_DIR}/common
@@ -71,7 +71,7 @@ LIBFT = ${LIBFT_DIR}/libft.a
 all: ${NAME}
 
 ${NAME}: ${LIBFT} ${OBJS} ${INCLUDES} Makefile
-	@gcc ${CCFLAGS} ${OBJS}  -L./srcs/libft -lft -shared -o ${NAME}
+	@gcc ${CCFLAGS} ${OBJS}  -L./srcs/libft -lft -install_name $(shell pwd)/${NAME} -shared -o ${NAME}
 	@strip -x ${NAME}
 	@rm -f ${SYMLINK}
 	@ln -s ${NAME} ${SYMLINK}

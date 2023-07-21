@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:45:36 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 10:47:57 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:50:42 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MALLOC_INTERNAL_H
 
 # include <sys/mman.h>
-# include "../srcs/libft/libft.h"
+# include "../srcs/libft/libft_malloc.h"
 
 /*
 ** Zone type enum
@@ -89,26 +89,26 @@ t_zone			*g_zones;
 /*
 ** main internal functions
 */
-t_alloc	*_alloc_add(size_t size);
-void	_alloc_remove(void *ptr);
-t_alloc	*_alloc_realloc(void *ptr, size_t size);
-t_zone	*_zone_add(char type, size_t size);
-void	_zone_remove(t_zone *zone);
-void	_print_zones(void);
+t_alloc	*m_alloc_add(size_t size);
+void	m_alloc_remove(void *ptr);
+t_alloc	*m_alloc_realloc(void *ptr, size_t size);
+t_zone	*m_zone_add(char type, size_t size);
+void	m_zone_remove(t_zone *zone);
+void	m_print_zones(void);
 
 /*
 ** helpers
 */
-char	_get_type(size_t size);
-size_t	_aligned_size(size_t size);
-char	*_endzone(t_zone *zone);
-char	*_endalloc(t_alloc *alloc);
-char	_is_space_middle_alloc(t_alloc *head, size_t size);
-char	_is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
-char	_is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
-size_t	_count_zone_bytype(char type);
-t_zone	*_find_zone(void *ptr);
-void	_zone_sort(void);
+char	m_get_type(size_t size);
+size_t	m_aligned_size(size_t size);
+char	*m_endzone(t_zone *zone);
+char	*m_endalloc(t_alloc *alloc);
+char	is_space_middle_alloc(t_alloc *head, size_t size);
+char	is_space_end_alloc(t_alloc *head, t_zone *zone, size_t size);
+char	is_space_begin_zone(t_alloc *head, t_zone *zone, size_t size);
+size_t	count_zone_bytype(char type);
+t_zone	*m_find_zone(void *ptr);
+void	m_zone_sort(void);
 
 /*
 ** constructor && destructor 

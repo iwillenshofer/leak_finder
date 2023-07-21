@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ftm_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/01 11:07:34 by iwillens          #+#    #+#             */
-/*   Updated: 2023/01/01 12:23:13 by iwillens         ###   ########.fr       */
+/*   Created: 2023/01/01 11:08:07 by iwillens          #+#    #+#             */
+/*   Updated: 2023/07/21 17:43:49 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-void	ft_putchar(char c)
+void	ftm_putstr(const char *s)
 {
-	write(1, &c, 1);
+	write(1, s, ftm_strlen(s));
 }

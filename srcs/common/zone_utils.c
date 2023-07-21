@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 13:34:00 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:15:08 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** lie in zone/alloc headers or a zone free space, or even 'in between'
 ** valid allocations. ie: ptr = malloc(10); ptr + 15;)
 */
-t_zone	*_find_zone(void *ptr)
+t_zone	*m_find_zone(void *ptr)
 {
 	t_zone	*head;
 
@@ -61,7 +61,7 @@ void	__swap(t_zone *self)
 ** Sorting zones may be needed to make sure they are ordered
 ** according to their address (as required by the subject when printing). 
 */
-void	_zone_sort(void)
+void	m_zone_sort(void)
 {
 	t_zone	*head;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone_remove.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 00:14:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 09:34:23 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:13:15 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	__deallocate(t_zone *zone)
 /*
 ** detaches the zone from the list and remove it
 */
-void	_zone_remove(t_zone *zone)
+void	m_zone_remove(t_zone *zone)
 {
 	t_zone	*head;
 

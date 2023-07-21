@@ -6,12 +6,22 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 17:35:05 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 20:18:54 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
+
+/*
+** prevents the original malloc from being included, to avoid function
+** definition conflict. there may be a better way to do that.
+*/
+
+#ifndef _MALLOC_UNDERSCORE_MALLOC_H_
+#  define _MALLOC_UNDERSCORE_MALLOC_H_
+# endif
+
 
 # include "malloc_internal.h"
 # include "malloc_bonus.h"
@@ -30,24 +40,24 @@ typedef struct s_info
 	int			line;
 }	t_info;
 
-# define malloc(a) _malloc(a, _info(__FILE__, __FUNCTION__, __LINE__))
-# define free(a) _free(a, _info(__FILE__, __FUNCTION__, __LINE__))
-# define realloc(a, b) _realloc(a, b, _info(__FILE__, __FUNCTION__, __LINE__))
-# define calloc(a, b) _calloc(a, b, _info(__FILE__, __FUNCTION__, __LINE__))
+# define malloc(a) m_malloc(a, info(__FILE__, __FUNCTION__, __LINE__))
+# define free(a) m_free(a, info(__FILE__, __FUNCTION__, __LINE__))
+# define realloc(a, b) m_realloc(a, b, info(__FILE__, __FUNCTION__, __LINE__))
+# define calloc(a, b) m_calloc(a, b, info(__FILE__, __FUNCTION__, __LINE__))
 
-t_info	_info(const char *file, const char *function, int line)
+t_info	info(const char *file, const char *function, int line)
 		__attribute__ ((visibility ("default")));
 
-void	_free(void *ptr, t_info info)
+void	m_free(void *ptr, t_info info)
 		__attribute__ ((visibility ("default")));
 
-void	*_malloc(size_t size, t_info info)
+void	*m_malloc(size_t size, t_info info)
 		__attribute__ ((visibility ("default")));
 
-void	*_realloc(void *ptr, size_t size, t_info info)
+void	*m_realloc(void *ptr, size_t size, t_info info)
 		__attribute__ ((visibility ("default")));
 
-void	*_calloc(size_t count, size_t size, t_info info)
+void	*m_calloc(size_t count, size_t size, t_info info)
 		__attribute__ ((visibility ("default")));
 
 void	show_alloc_mem(void)

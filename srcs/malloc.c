@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:52:02 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 17:41:58 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 19:47:54 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_zone			*g_zones = NULL;
 t_info			g_record[RECORD_BUFFER] = {0};
 pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-t_info	_info(const char *file, const char *function, int line)
+t_info	info(const char *file, const char *function, int line)
 {
 	t_info info;
 
@@ -28,7 +28,6 @@ t_info	_info(const char *file, const char *function, int line)
 	info.line = line;
 	return (info);
 }
-
 void	print_leaks(void)
 {
 	size_t i;
@@ -36,32 +35,51 @@ void	print_leaks(void)
 
 	i = 0;
 	leaks = 0;
-	ft_putstr("SHOWING LEAKS:\n");
+	m_put_color(WHITE, BOLD, NULL);
+	ftm_putstr("\nSEARCHING LEAKS:\n");
 	while (i < RECORD_BUFFER)
 	{
 		if (g_record[i].address)
 		{
-			ft_puthex((size_t)g_record[i].address);
-			ft_putstr(" ");
-			ft_putnbr(g_record[i].size);
-			ft_putstr(" bytes. Allocated on ");
+			m_put_color(CYAN, REGULAR, NULL);
+			ftm_puthex((size_t)g_record[i].address);
+			ftm_putstr(" ");
+			m_put_color(BLUE, REGULAR, NULL);
+			ftm_putnbr(g_record[i].size);
+			ftm_putstr(" bytes");
+			m_put_color(WHITE, FAINT, NULL);
+			ftm_putstr(", allocated on ");
+			m_put_color(WHITE, ITALIC, NULL);
 			if (g_record[i].function)
-				ft_putstr(g_record[i].function);
-			ft_putstr(" ");
+				ftm_putstr(g_record[i].function);
+			ftm_putstr("() ");
+			m_put_color(PURPLE, BOLD, NULL);
 			if (g_record[i].file)
-				ft_putstr(g_record[i].file);
-			ft_putstr(" : ");
-			ft_putnbr(g_record[i].line);
-			ft_putstr("\n");
+				ftm_putstr(g_record[i].file);
+			ftm_putstr(" : ");
+			ftm_putnbr(g_record[i].line);
+			ftm_putstr("\n");
 			leaks++;
+			m_put_color(RESET, REGULAR, NULL);
 		}
 		i++;
 	}
 	if (!leaks)
-		ft_putstr("NO LEAKS FOUND\n");
+	{
+		m_put_color(GREEN, BOLD, NULL);
+		ftm_putstr("NO LEAKS FOUND\n\n");
+	}
+	else
+	{
+		m_put_color(RED, BOLD, NULL);
+		ftm_putstr("FOUND ");
+		ftm_putnbr(leaks);
+		ftm_putstr(" LEAKS\n\n");
+	}
+	m_put_color(RESET, REGULAR, NULL);
 }
 
-void	_record(int action, t_info info)
+void	m_record(int action, t_info info)
 {
 	size_t i;
 
@@ -75,28 +93,28 @@ void	_record(int action, t_info info)
 		}
 		else if (action == ACTION_REMOVE && g_record[i].address == info.address)
 		{
-			ft_bzero(&(g_record[i]), sizeof(t_info));
+			ftm_bzero(&(g_record[i]), sizeof(t_info));
 			return ;
 		}
 		i++;
 	}
 }
 
-void	_free(void *ptr, t_info info)
+void	m_free(void *ptr, t_info info)
 {
 	(void)info;
 	if (ptr)
 	{
 		lock_mutex();
-		_alloc_remove(ptr);
+		m_alloc_remove(ptr);
 		unlock_mutex();
 		info.address = ptr;
-		_record(ACTION_REMOVE, info);
+		m_record(ACTION_REMOVE, info);
 	}
 	return ;
 }
 
-void	*_malloc(size_t size, t_info info)
+void	*m_malloc(size_t size, t_info info)
 {
 	t_alloc	*new_alloc;
 
@@ -104,61 +122,61 @@ void	*_malloc(size_t size, t_info info)
 	if (!(size))
 		return (NULL);
 	lock_mutex();
-	new_alloc = _alloc_add(size);
+	new_alloc = m_alloc_add(size);
 	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);
 	info.address = new_alloc->ptr;
 	info.size = size;
-	_record(ACTION_ADD, info);
+	m_record(ACTION_ADD, info);
 	return (new_alloc->ptr);
 }
 
-void	*_realloc(void *ptr, size_t size, t_info info)
+void	*m_realloc(void *ptr, size_t size, t_info info)
 {
 	t_alloc	*new_alloc;
 
 	(void)info;
 	if (!ptr)
-		return (_malloc(size, info));
+		return (m_malloc(size, info));
 	if (!(size))
 	{
-		_free(ptr, info);
+		m_free(ptr, info);
 		return (NULL);
 	}
 	lock_mutex();
-	new_alloc = _alloc_realloc(ptr, size);
+	new_alloc = m_alloc_realloc(ptr, size);
 	unlock_mutex();
 	if (!(new_alloc))
 		return (NULL);
 	info.address = new_alloc->ptr;
 	info.size = size;
-	_record(ACTION_ADD, info);
+	m_record(ACTION_ADD, info);
 	return (new_alloc->ptr);
 }
 
-void	*_calloc(size_t count, size_t size, t_info info)
+void	*m_calloc(size_t count, size_t size, t_info info)
 {
 	void	*s;
 
 	(void)info;
-	s = _malloc(count * size, info);
+	s = m_malloc(count * size, info);
 	if (!(s))
 		return (NULL);
-	ft_bzero(s, count * size);
+	ftm_bzero(s, count * size);
 	return (s);
 }
 
 void	show_alloc_mem(void)
 {
 	lock_mutex();
-	_print_zones();
+	m_print_zones();
 	unlock_mutex();
 }
 
 void	show_alloc_mem_ex(void)
 {
 	lock_mutex();
-	_print_zones_ex();
+	m_print_zones_ex();
 	unlock_mutex();
 }

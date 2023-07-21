@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_realloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:46:05 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 22:05:45 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:15:00 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ t_alloc	*__reallocate(t_alloc *alloc, size_t size)
 	t_alloc	*new_alloc;
 	size_t	limit;
 
-	new_alloc = _alloc_add(size);
+	new_alloc = m_alloc_add(size);
 	limit = size;
 	if (size > alloc->size)
 		limit = alloc->size;
 	if (new_alloc && new_alloc->ptr)
 	{
-		ft_memcpy(new_alloc->ptr, alloc->ptr, limit);
-		_alloc_remove(alloc->ptr);
+		ftm_memcpy(new_alloc->ptr, alloc->ptr, limit);
+		m_alloc_remove(alloc->ptr);
 		return (new_alloc);
 	}
 	else
@@ -67,7 +67,7 @@ t_alloc	*__reallocate(t_alloc *alloc, size_t size)
 char	__is_space_realloc_middle(t_alloc *alloc, size_t size)
 {
 	return (alloc->next
-		&& (size_t)((char *)(alloc->next) - _endalloc(alloc)) >= size);
+		&& (size_t)((char *)(alloc->next) - m_endalloc(alloc)) >= size);
 }
 
 /*
@@ -77,7 +77,7 @@ char	__is_space_realloc_middle(t_alloc *alloc, size_t size)
 char	__is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size)
 {
 	return (!(alloc->next)
-		&& zone->size - (_endalloc(alloc) - (char*)(zone)) >= size);
+		&& zone->size - (m_endalloc(alloc) - (char*)(zone)) >= size);
 }
 
 /*
@@ -89,16 +89,16 @@ char	__is_space_realloc_end(t_alloc *alloc, t_zone *zone, size_t size)
 ** else : there is no space for reallocation. Must reallocate.
 ** all in all, cases 2, 3 and 4 will just resize. Otherwise, reallocate.
 */
-t_alloc	*_alloc_realloc(void *ptr, size_t size)
+t_alloc	*m_alloc_realloc(void *ptr, size_t size)
 {
 	char	new_type;
 	t_zone	*zone;
 	t_alloc	*alloc;
 	t_alloc	*new_alloc;
 
-	size = _aligned_size(size);
-	new_type = _get_type(size);
-	zone = _find_zone(ptr);
+	size = m_aligned_size(size);
+	new_type = m_get_type(size);
+	zone = m_find_zone(ptr);
 	alloc = __find_alloc(ptr, zone);
 	new_alloc = alloc;
 	if (!zone || !alloc)

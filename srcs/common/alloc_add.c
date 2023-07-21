@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:18:20 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 22:00:15 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:14:38 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/malloc.h"
 
-char	_get_type(size_t size)
+char	m_get_type(size_t size)
 {
 	if (size > SMALL_LIMIT)
 		return (LARGE);
@@ -24,7 +24,7 @@ char	_get_type(size_t size)
 t_alloc	*__newalloc(t_alloc *pos, t_alloc *prev, t_alloc *next, size_t size)
 {
 	pos->size = size;
-	pos->ptr = ((char *)pos + _aligned_size(sizeof(t_alloc)));
+	pos->ptr = ((char *)pos + m_aligned_size(sizeof(t_alloc)));
 	pos->prev = NULL;
 	pos->next = NULL;
 	if (prev)
@@ -52,25 +52,25 @@ t_alloc	*__find_spot(t_zone *zone, size_t s)
 
 	alloc = NULL;
 	h = zone->allocs;
-	if (zone->free < (s + _aligned_size(sizeof(t_alloc))))
+	if (zone->free < (s + m_aligned_size(sizeof(t_alloc))))
 		return (NULL);
 	if (!(h))
-		alloc = __newalloc((t_alloc *)(_endzone(zone)), NULL, NULL, s);
-	else if (_is_space_begin_zone(h, zone, s))
-		alloc = __newalloc((t_alloc *)(_endzone(zone)), NULL, zone->allocs, s);
+		alloc = __newalloc((t_alloc *)(m_endzone(zone)), NULL, NULL, s);
+	else if (is_space_begin_zone(h, zone, s))
+		alloc = __newalloc((t_alloc *)(m_endzone(zone)), NULL, zone->allocs, s);
 	if (alloc && (!(zone->allocs) || (zone->allocs == alloc->next)))
 		zone->allocs = alloc;
 	while (!(alloc) && h)
 	{
-		if (_is_space_middle_alloc(h, s))
+		if (is_space_middle_alloc(h, s))
 			alloc = __newalloc((t_alloc *)
-					(_endalloc(h) + h->size), h, h->next, s);
-		else if (_is_space_end_alloc(h, zone, s))
-			alloc = __newalloc((t_alloc *)(_endalloc(h) + h->size), h, NULL, s);
+					(m_endalloc(h) + h->size), h, h->next, s);
+		else if (is_space_end_alloc(h, zone, s))
+			alloc = __newalloc((t_alloc *)(m_endalloc(h) + h->size), h, NULL, s);
 		h = h->next;
 	}
 	if (alloc)
-		zone->free -= (s + _aligned_size(sizeof(t_alloc)));
+		zone->free -= (s + m_aligned_size(sizeof(t_alloc)));
 	return (alloc);
 }
 
@@ -86,15 +86,15 @@ t_alloc	*__find_spot(t_zone *zone, size_t s)
 **
 ** return the pointer.	
 */
-t_alloc	*_alloc_add(size_t size)
+t_alloc	*m_alloc_add(size_t size)
 {
 	char	type;
 	t_alloc	*allocated;
 	t_zone	*zone;
 
 	zone = g_zones;
-	size = _aligned_size(size);
-	type = _get_type(size);
+	size = m_aligned_size(size);
+	type = m_get_type(size);
 	allocated = NULL;
 	while (zone && !(allocated) && type != LARGE)
 	{
@@ -103,7 +103,7 @@ t_alloc	*_alloc_add(size_t size)
 		zone = zone->next;
 	}
 	if (!(allocated))
-		zone = _zone_add(type, size);
+		zone = m_zone_add(type, size);
 	if (!(allocated) && zone)
 	{
 		allocated = __find_spot(zone, size);

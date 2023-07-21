@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:45:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 12:48:30 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 18:16:53 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ t_bool	check_last_pos(t_zone *zone, char *addr)
 		pos = ((char *)(zone)) + sizeof(t_zone);
 	if (addr > pos)
 	{
-		ft_puthex((size_t)(addr));
-		ft_putstr("  ... NO MORE ALLOCATIONS\n");
-		ft_puthex((size_t)((char *)zone + zone->size - 1));
-		ft_putstr("  [END OF ZONE]\n\n");
+		ftm_puthex((size_t)(addr));
+		ftm_putstr("  ... NO MORE ALLOCATIONS\n");
+		ftm_puthex((size_t)((char *)zone + zone->size - 1));
+		ftm_putstr("  [END OF ZONE]\n\n");
 		return (true);
 	}
 	return (false);
@@ -49,22 +49,22 @@ void	_print_zone_hex(t_zone *zone)
 	char	buffer[PRINT_COLUMNS + 1];
 	t_color	color;
 
-	_clear_buffer((char *)&buffer);
+	m_clear_buffer((char *)&buffer);
 	addr = (char *)zone;
 	next_alloc = zone->allocs;
 	while (addr < (char *)(zone) + zone->size)
 	{
-		_print_addr_type_color(zone, addr, next_alloc, &color);
+		m_print_addr_type_color(zone, addr, next_alloc, &color);
 		if (!((addr - (char *)zone) % PRINT_COLUMNS))
-			ft_puthex((size_t)(addr));
+			ftm_puthex((size_t)(addr));
 		if (ALIGNMENT > 1 && !((addr - (char *)zone) % ALIGNMENT))
-			ft_putchar(' ');
-		ft_puthexbyte(*addr);
+			ftm_putchar(' ');
+		ftm_puthexbyte(*addr);
 		buffer[(addr - (char *)zone) % PRINT_COLUMNS] = *addr;
 		if (next_alloc && addr + 1 == (char *)(next_alloc->next))
 			next_alloc = next_alloc->next;
 		if (!((++addr - (char *)zone) % PRINT_COLUMNS))
-			_print_buffer((char *)&buffer, &color);
+			m_print_buffer((char *)&buffer, &color);
 		if (!((addr - (char *)zone) % PRINT_COLUMNS)
 			&& check_last_pos(zone, addr))
 			break ;
@@ -78,55 +78,55 @@ void	_print_zone_hex(t_zone *zone)
 void	_print_zone_ex(t_zone *zone)
 {
 	if (zone->type == TINY)
-		ft_putstr("TINY: ");
+		ftm_putstr("TINY: ");
 	else if (zone->type == SMALL)
-		ft_putstr("SMALL: ");
+		ftm_putstr("SMALL: ");
 	else
-		ft_putstr("LARGE: ");
-	ft_puthex((size_t)zone);
-	ft_putchar(' ');
-	_print_zone_information(zone);
+		ftm_putstr("LARGE: ");
+	ftm_puthex((size_t)zone);
+	ftm_putchar(' ');
+	m_print_zone_information(zone);
 	_print_zone_hex(zone);
-	_put_color(RESET, REGULAR, NULL);
+	m_put_color(RESET, REGULAR, NULL);
 }
 
-void	_print_zones_resume(void)
+void	m_print_zones_resume(void)
 {
 	t_zone	*head;
 
 	head = g_zones;
-	_put_color(BLUE, BOLD, NULL);
-	ft_putstr("Overall Zones Information:\n");
-	_put_color(RESET, REGULAR, NULL);
+	m_put_color(BLUE, BOLD, NULL);
+	ftm_putstr("Overall Zones Information:\n");
+	m_put_color(RESET, REGULAR, NULL);
 	while (head)
 	{
 		if (head->type == TINY)
-			ft_putstr("TINY: ");
+			ftm_putstr("TINY: ");
 		else if (head->type == SMALL)
-			ft_putstr("SMALL: ");
+			ftm_putstr("SMALL: ");
 		else
-			ft_putstr("LARGE: ");
-		ft_puthex((size_t)head);
-		ft_putchar(' ');
-		_print_zone_information(head);
+			ftm_putstr("LARGE: ");
+		ftm_puthex((size_t)head);
+		ftm_putchar(' ');
+		m_print_zone_information(head);
 		head = head->next;
 	}
-	ft_putstr("\n\n");
-	_put_color(RESET, REGULAR, NULL);
+	ftm_putstr("\n\n");
+	m_put_color(RESET, REGULAR, NULL);
 }
 
 /*
 ** begin of printing zones. just a loop through all zones in the list.
 */
-void	_print_zones_ex(void)
+void	m_print_zones_ex(void)
 {
 	t_zone	*head;
 
 	head = g_zones;
-	_print_zones_resume();
-	_put_color(BLUE, BOLD, NULL);
-	ft_putstr("Individual Zone Information:\n");
-	_put_color(RESET, REGULAR, NULL);
+	m_print_zones_resume();
+	m_put_color(BLUE, BOLD, NULL);
+	ftm_putstr("Individual Zone Information:\n");
+	m_put_color(RESET, REGULAR, NULL);
 	while (head)
 	{
 		_print_zone_ex(head);

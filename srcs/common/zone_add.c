@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:28:57 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/07 14:01:16 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:15:08 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** ensure size is multiple of 16 (ALIGNMENT).
 */
-size_t	_aligned_size(size_t size)
+size_t	m_aligned_size(size_t size)
 {
 	size_t	rest;
 
@@ -44,8 +44,8 @@ size_t	__get_paginated_size(size_t size)
 	amount = 1;
 	if (size <= SMALL_LIMIT)
 		amount = 100;
-	total_size = _aligned_size(sizeof(t_zone)) + amount
-		* (_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
+	total_size = m_aligned_size(sizeof(t_zone)) + amount
+		* (m_aligned_size(sizeof(t_alloc)) + ALIGNMENT);
 	if (size > SMALL_LIMIT)
 		total_size += size;
 	else if (size > TINY_LIMIT)
@@ -99,7 +99,7 @@ void	__zone_place_new(t_zone *ptr)
 ** 2. set up zone structure
 ** 3. add to the end of g_zones.
 */
-t_zone	*_zone_add(char type, size_t size)
+t_zone	*m_zone_add(char type, size_t size)
 {
 	t_zone	*ptr;
 	size_t	total_size;
@@ -112,11 +112,11 @@ t_zone	*_zone_add(char type, size_t size)
 	ptr = __allocate(total_size);
 	if (!(ptr))
 		return (NULL);
-	ft_bzero(ptr, _aligned_size(sizeof(t_zone)));
-	ptr->free = total_size - _aligned_size(sizeof(t_zone));
+	ftm_bzero(ptr, m_aligned_size(sizeof(t_zone)));
+	ptr->free = total_size - m_aligned_size(sizeof(t_zone));
 	ptr->size = total_size;
 	ptr->type = type;
 	__zone_place_new(ptr);
-	_zone_sort();
+	m_zone_sort();
 	return (ptr);
 }

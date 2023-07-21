@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:29:28 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 16:33:10 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 19:45:25 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ pthread_mutex_t	g_mutex;
 # define REGULAR 0
 # define BOLD 1
 # define FAINT 2
+# define ITALIC 3
 
 # define PRINT_COLUMNS 64
 
@@ -69,13 +70,13 @@ void	show_alloc_mem_ex(void)
 /*
 ** show_mem_hex
 */
-void	_put_color(char new_color, char new_opt, t_color *current);
-void	_print_buffer(char *s, t_color *color);
-void	_clear_buffer(char *s);
-t_bool	_print_addr_type_color(t_zone *zone, char *addr,
+void	m_put_color(char new_color, char new_opt, t_color *current);
+void	m_print_buffer(char *s, t_color *color);
+void	m_clear_buffer(char *s);
+t_bool	m_print_addr_type_color(t_zone *zone, char *addr,
 			t_alloc *next_alloc, t_color *color);
-void	_print_zone_information(t_zone *zone);
-void	_print_zones_ex(void);
+void	m_print_zone_information(t_zone *zone);
+void	m_print_zones_ex(void);
 
 /*
 ** mutex functions
