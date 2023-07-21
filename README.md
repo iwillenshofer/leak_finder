@@ -26,13 +26,14 @@
 
 1. clone this repo.
 ```bash
-# create a main file.
+# clone this repo.
 $ git clone git@github.com:iwillenshofer/leak_finder.git
 $ make
 ````
 
 2. Add the `malloc.h` header as the *first header* in your project.
 ```c
+# add as the first header in your project
 #include "malloc.h"
 ```
 
