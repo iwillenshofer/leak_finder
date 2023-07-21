@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:07:11 by iwillens          #+#    #+#             */
-/*   Updated: 2023/05/21 20:09:50 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:19:31 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	ft_isprint(char c)
+int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
 		return (TRUE);

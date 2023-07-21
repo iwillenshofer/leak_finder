@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 11:07:52 by iwillens          #+#    #+#             */
-/*   Updated: 2023/01/01 12:23:13 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:15:40 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
