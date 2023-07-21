@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_mem_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:04:13 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/06 18:26:45 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:38:13 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	_put_color(char new_color, char new_opt, t_color *current)
 ** 4. remaining bytes of alloc headers = regular cyan;
 ** 5. user allocated bytes = faint cyan.
 ** 6. free bytes within zone = faint white.
+** returns false if address is not allocated.
+** otherwise returns true.
 */
-void	_print_addr_type_color(t_zone *zone, char *addr,
+t_bool	_print_addr_type_color(t_zone *zone, char *addr,
 		t_alloc *next_alloc, t_color *color)
 {
 	if (addr == (char *)zone)
@@ -68,5 +70,9 @@ void	_print_addr_type_color(t_zone *zone, char *addr,
 		&& addr < (char *)next_alloc->ptr + next_alloc->size)
 		_put_color(CYAN, FAINT, color);
 	else
+	{
 		_put_color(WHITE, FAINT, color);
+		return (false);
+	}
+	return (true);
 }

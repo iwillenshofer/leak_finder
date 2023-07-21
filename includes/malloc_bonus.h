@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iwillens <iwillens@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:29:28 by iwillens          #+#    #+#             */
-/*   Updated: 2023/06/05 18:12:11 by iwillens         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:35:50 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <pthread.h>
 # include "malloc_internal.h"
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
+typedef enum e_bool {false, true}	t_bool;
 /*
 ** Mutex global variable
 */
@@ -59,10 +64,13 @@ void	show_alloc_mem_ex(void)
 void	_put_color(char new_color, char new_opt, t_color *current);
 void	_print_buffer(char *s, t_color *color);
 void	_clear_buffer(char *s);
-void	_print_addr_type_color(t_zone *zone, char *addr,
+t_bool	_print_addr_type_color(t_zone *zone, char *addr,
 			t_alloc *next_alloc, t_color *color);
 void	_print_zone_information(t_zone *zone);
 void	_print_zones_ex(void);
+
+void	*calloc(size_t count, size_t size)
+		__attribute__ ((visibility ("default")));
 
 /*
 ** mutex functions
