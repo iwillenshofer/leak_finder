@@ -6,13 +6,13 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 11:08:07 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 15:15:51 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 17:40:06 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *s)
+void	ft_putstr(const char *s);
 {
 	write(1, s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 10:54:12 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 15:19:38 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 17:39:35 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	ft_putchar(char c);
 void	ft_puthex(size_t nb);
 void	ft_putnbr(int nb);
-void	ft_putstr(char *s);
+void	ft_putstr(const char *s);
 size_t	ft_strlen(const char *s);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

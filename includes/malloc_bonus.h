@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:29:28 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 14:54:53 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 16:33:10 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ t_bool	_print_addr_type_color(t_zone *zone, char *addr,
 			t_alloc *next_alloc, t_color *color);
 void	_print_zone_information(t_zone *zone);
 void	_print_zones_ex(void);
-
-void	*calloc(size_t count, size_t size)
-		__attribute__ ((visibility ("default")));
 
 /*
 ** mutex functions

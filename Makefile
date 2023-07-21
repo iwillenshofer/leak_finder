@@ -6,7 +6,7 @@
 #    By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/07/21 14:57:44 by igorwillens      ###   ########.fr        #
+#    Updated: 2023/07/21 16:38:14 by igorwillens      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,7 @@ BONUS_SRCS = ${BONUS_DIR}/show_mem_ex.c \
 				${BONUS_DIR}/show_mem_colors.c \
 				${BONUS_DIR}/show_mem_buffer.c \
 				${BONUS_DIR}/show_mem_info.c \
-				${BONUS_DIR}/thread_safe.c \
-				${BONUS_DIR}/calloc.c
+				${BONUS_DIR}/thread_safe.c
 
 SRCS = ${COMMON_SRCS} ${BONUS_SRCS} ${SRC_DIR}/malloc.c
 
