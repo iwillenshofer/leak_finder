@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/iwillenshofer/malloc?color=blueviolet" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/iwillenshofer/malloc?color=blue" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/commit-activity/t/iwillenshofer/malloc?color=brightgreen" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/iwillenshofer/malloc?color=brightgreen" />
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/iwillenshofer/leak_finder?color=blueviolet" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/iwillenshofer/leak_finder?color=blue" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/commit-activity/t/iwillenshofer/leak_finder?color=brightgreen" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/iwillenshofer/leak_finder?color=brightgreen" />
 </p>
 <br>
 
