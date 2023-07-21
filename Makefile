@@ -6,7 +6,7 @@
 #    By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 17:38:02 by iwillens          #+#    #+#              #
-#    Updated: 2023/07/21 13:36:44 by igorwillens      ###   ########.fr        #
+#    Updated: 2023/07/21 14:57:44 by igorwillens      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = libft_malloc_${HOSTTYPE}.so
 SYMLINK = libft_malloc.so
 
 CC = gcc
-CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -fsanitize=address -g -DDEBUG=1
+CCFLAGS = -Wall -Werror -Wextra -std=c89 -fvisibility=hidden -DDEBUG=1
 
 SRC_DIR = ./srcs
 COMMON_DIR = ${SRC_DIR}/common
@@ -73,7 +73,7 @@ all: ${NAME}
 
 ${NAME}: ${LIBFT} ${OBJS} ${INCLUDES} Makefile
 	@gcc ${CCFLAGS} ${OBJS}  -L./srcs/libft -lft -shared -o ${NAME}
-#	@strip -x ${NAME}
+	@strip -x ${NAME}
 	@rm -f ${SYMLINK}
 	@ln -s ${NAME} ${SYMLINK}
 	@echo "\033[96m${NAME} is built. \033[0m"

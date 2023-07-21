@@ -6,7 +6,7 @@
 /*   By: igorwillenshofer <igorwillenshofer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:29:28 by iwillens          #+#    #+#             */
-/*   Updated: 2023/07/21 13:35:50 by igorwillens      ###   ########.fr       */
+/*   Updated: 2023/07/21 14:54:53 by igorwillens      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@
 #  define DEBUG 0
 # endif
 
+# ifndef false
+
 typedef enum e_bool {false, true}	t_bool;
+
+# else
+
+typedef char	t_bool;
+
+# endif
 /*
 ** Mutex global variable
 */
